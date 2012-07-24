@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+	<title>Professors</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+	<meta name="keywords" content="python web application" />
+	<meta name="description" content="Professors on PopIt" />
+	<link rel="shortcut icon" href="${request.static_url('profs:static/favicon.ico')}" />
+	<link rel="stylesheet" href="${request.static_url('profs:static/bootstrap/css/bootstrap.css')}" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="${request.static_url('profs:static/bootstrap/css/bootstrap-responsive.css')}" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="${request.static_url('profs:static/main.css')}" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="${request.static_url('profs:static/awesome/css/font-awesome.css')}">
+	<!--[if lte IE 6]>
+	<link rel="stylesheet" href="${request.static_url('profs:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
+	<![endif]-->
+</head>
+<body>
+	<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</a>
+					<a class="brand" href="#">${project}</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<li class="active"><a href="#"><i class="icon-home"></i> Home</a></li>
+							<li><a href="#FIXME"><i class="icon-cloud"></i> Api</a></li>
+							<li><a href="#FIXME"><i class="icon-comments"></i> About</a></li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+			</div>
+		</div>
+
+		<div class="container">
+
+			<!-- Main hero unit for a primary marketing message or call to action -->
+			<div class="hero-unit">
+				<h1>Welcome</h1>
+				<p>Lorem Ipsum</p>
+			</div>
+
+			<div class="well controls">
+				<form action="#">
+					<div class="input-append">
+						<input id="find-profs" class="" type="text" size="40" placeholder="find...">
+						<button class="btn btn-primary" type="button"><i class="icon-search"></i> Search</button>
+						<button class="btn" type="button"><i class="icon-cogs"></i> Options</button>
+					</div>
+			</form>
+			</div>
+
+			<hr>
+
+			<footer>
+				<p>&copy; Professors 2012</p>
+			</footer>
+
+		</div> <!-- /container -->
+</body>
+</html>

@@ -1,0 +1,41 @@
+body {
+    padding-bottom: 40px;
+    padding-top: 60px;
+}
+
+.input-append{
+    font-size:0;
+}​
+
+
+/* Navigtion */
+ul.nav > li > a hover {
+	-moz-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+ul.nav > li > a{
+	-moz-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+.navbar-fixed-top .brand {
+    -moz-transition-delay: 0s;
+    -moz-transition-duration: 0.2s;
+    -moz-transition-property: all;
+    -moz-transition-timing-function: linear;
+    color: #000000;
+    float: right;
+    font-weight: bold;
+    margin-left: 20px;
+    padding-left: 0;
+    padding-right: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 30px rgba(255, 255, 255, 0.125);
+}
+.navbar-fixed-top .brand:hover {
+    -moz-text-blink: none;
+    -moz-text-decoration-color: -moz-use-text-color;
+    -moz-text-decoration-line: none;
+    -moz-text-decoration-style: solid;
+}
