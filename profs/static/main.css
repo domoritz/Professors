@@ -3,10 +3,23 @@ body {
     padding-top: 60px;
 }
 
+/* Search Form */
+#profs-serach-form .btn {
+	font-size: 18px;
+	height: 40px;
+	padding: 5px 10px;
+}
+
+input[type="text"] {
+	font-size: 18px;
+	height: 30px;
+	width: 300px;
+	padding: 5px 10px;
+}
+
 .input-append{
     font-size:0;
 }​
-
 
 /* Navigtion */
 ul.nav > li > a hover {

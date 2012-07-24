@@ -8,13 +8,14 @@
 	<link rel="shortcut icon" href="${request.static_url('profs:static/favicon.ico')}" />
 	<link rel="stylesheet" href="${request.static_url('profs:static/bootstrap/css/bootstrap.css')}" type="text/css" media="screen" charset="utf-8" />
 	<link rel="stylesheet" href="${request.static_url('profs:static/bootstrap/css/bootstrap-responsive.css')}" type="text/css" media="screen" charset="utf-8" />
-	<link rel="stylesheet" href="${request.static_url('profs:static/main.css')}" type="text/css" media="screen" charset="utf-8" />
 	<link rel="stylesheet" href="${request.static_url('profs:static/awesome/css/font-awesome.css')}">
+	<link rel="stylesheet" href="${request.static_url('profs:static/main.css')}" type="text/css" media="screen" charset="utf-8" />
 	<!--[if lte IE 6]>
 	<link rel="stylesheet" href="${request.static_url('profs:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
 	<![endif]-->
 </head>
 <body>
+	
 	<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
@@ -39,16 +40,13 @@
 
 			<!-- Main hero unit for a primary marketing message or call to action -->
 			<div class="hero-unit">
-				<h1>Welcome</h1>
-				<p>Lorem Ipsum</p>
-			</div>
+				<h1>Find Professors</h1>
+				<p>Type in a name, field of study or location.</p>
 
-			<div class="well controls">
-				<form action="#">
+				<form id="profs-serach-form" action="#">
 					<div class="input-append">
 						<input id="find-profs" class="" type="text" size="40" placeholder="find...">
 						<button class="btn btn-primary" type="button"><i class="icon-search"></i> Search</button>
-						<button class="btn" type="button"><i class="icon-cogs"></i> Options</button>
 					</div>
 			</form>
 			</div>
@@ -60,5 +58,8 @@
 			</footer>
 
 		</div> <!-- /container -->
+
+		<script type="application/javascript" src="${request.static_url('profs:static/jquery/jquery-1.7.2.js')}" />
+		<script type="application/javascript" src="${request.static_url('profs:static/bootstrap/js/bootstrap.js')}" />
 </body>
 </html>
