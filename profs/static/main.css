@@ -4,13 +4,13 @@ body {
 }
 
 /* Search Form */
-#profs-serach-form .btn {
+#profs-serach-form.large .btn {
 	font-size: 18px;
 	height: 40px;
 	padding: 5px 10px;
 }
 
-input[type="text"] {
+#profs-serach-form.large input[type="text"] {
 	font-size: 18px;
 	height: 30px;
 	width: 300px;

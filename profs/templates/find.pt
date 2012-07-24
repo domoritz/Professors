@@ -1,0 +1,13 @@
+<metal:main use-macro="load: document.pt">
+
+	<!-- Main hero unit for a primary marketing message or call to action -->
+	<div class="hero-unit" metal:fill-slot="content">
+		<form id="profs-serach-form" action="#">
+					<div class="input-append">
+						<input id="find-profs" class="" type="text" size="40" value="${query}">
+						<button class="btn btn-primary" type="button"><i class="icon-search"></i> Search</button>
+					</div>
+			</form>
+	</div>
+
+</metal:main>
