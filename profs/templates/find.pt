@@ -7,8 +7,8 @@
 	</div>
 
 	<div id="results" class="container" metal:fill-slot="content">
-		<div class="well row" id="results-search-form">
-			<div class="span8 offset2">
+		<div class="well" id="results-search-form">
+			<div class="offset2">
 				<form id="profs-serach-form" class="form-horizontal medium" action="/search" method="POST">
 					<fieldset>
 						<div class="control-group">
