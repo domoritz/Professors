@@ -5,7 +5,7 @@
 		<h1>Find Professors</h1>
 		<p>Type in a name, field of study or location.</p>
 
-		<form id="profs-serach-form" class="large" action="find" method="POST">
+		<form id="profs-serach-form" class="large" action="/search" method="POST">
 			<div class="input-append">
 				<input id="find-profs" class="" type="text" size="40" name="query" placeholder="find...">
 				<button class="btn btn-primary" type="submit"><i class="icon-search"></i> Search</button>

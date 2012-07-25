@@ -48,7 +48,7 @@
 
 		</div> <!-- /container -->
 
-		<script type="application/javascript" src="${request.static_url('profs:static/jquery/jquery-1.7.2.js')}" />
-		<script type="application/javascript" src="${request.static_url('profs:static/bootstrap/js/bootstrap.js')}" />
+		<script type="text/javascript" src="${request.static_url('profs:static/jquery/jquery-1.7.2.js')}" />
+		<script type="text/javascript" src="${request.static_url('profs:static/bootstrap/js/bootstrap.js')}" />
 </body>
 </html>

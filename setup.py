@@ -3,7 +3,7 @@ import os
 from setuptools import setup, find_packages
 
 here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.txt')).read()
+README = open(os.path.join(here, 'README.md')).read()
 CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = [
@@ -13,7 +13,7 @@ requires = [
     ]
 
 setup(name='profs',
-      version='0.0',
+      version='0.1',
       description='profs',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
@@ -22,10 +22,10 @@ setup(name='profs',
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         ],
-      author='',
+      author='Dominik Moritz',
       author_email='',
       url='',
-      keywords='web pyramid pylons',
+      keywords='web popit professors',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
