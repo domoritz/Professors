@@ -37,6 +37,10 @@ class FunctionalTests(unittest.TestCase):
 
         self.testapp = TestApp(app)
 
+    def test_unexisting_page(self):
+        res = self.testapp.get('/SomePage', status=404)
+        self.assertTrue('Not Found' in res.body)
+
     def test_home_page(self):
         res = self.testapp.get('/', status=200)
         self.failUnless('id="home"' in res.body)

@@ -1,4 +1,8 @@
-0.0
+0.1
 ---
 
 -  Initial version
+-  Basic homepage
+-  Basic redirection on search
+-  Set up css, js assets
+-  100% Test coverage

@@ -2,3 +2,5 @@ pyramid
 pyramid_debugtoolbar
 waitress
 WebTest
+nose
+coverage

@@ -1,24 +1,29 @@
 Metadata-Version: 1.0
 Name: profs
 Version: 0.1
-Summary: profs
+Summary: A repository for data on professors.
 Home-page: UNKNOWN
 Author: Dominik Moritz
 Author-email: UNKNOWN
-License: UNKNOWN
-Description: Professors
-        ==========
-        
+License: Apache 2
+Description: #Professors
         A Professors repository built on top of PopIt
         
-        0.0
+        
+        ## Run the tests
+        
+        	python setup.py nosetests
+        	
+        This command will also print the test coverage. 
+        
+        0.1
         ---
         
         -  Initial version
-        
+        -  Basic homepage
+        -  Basic redirection on search
+        -  Set up css, js assets
+        -  100% Test coverage
 Keywords: web popit professors
 Platform: UNKNOWN
-Classifier: Programming Language :: Python
-Classifier: Framework :: Pylons
-Classifier: Topic :: Internet :: WWW/HTTP
-Classifier: Topic :: Internet :: WWW/HTTP :: WSGI :: Application
+Classifier: Open Data :: Professors
