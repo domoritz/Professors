@@ -1,7 +1,7 @@
 <metal:main use-macro="load: document.pt">
 
 	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div class="hero-unit" metal:fill-slot="content">
+	<div id="home" class="hero-unit" metal:fill-slot="content">
 		<h1>Find Professors</h1>
 		<p>Type in a name, field of study or location.</p>
 
