@@ -3,17 +3,17 @@ body {
     padding-top: 60px;
 }
 
-/* Search Form */
-#profs-serach-form.large .btn {
+/* Main search form */
+form.large .btn {
 	font-size: 18px;
-	height: 40px;
-	padding: 5px 10px;
+	height: 42px;
+	padding: 5px 13px;
 }
 
-#profs-serach-form.large input[type="text"] {
+form.large input[type="text"] {
 	font-size: 18px;
 	height: 30px;
-	width: 300px;
+	width: 350px;
 	padding: 5px 10px;
 }
 
@@ -22,33 +22,71 @@ body {
 }​
 
 /* Navigtion */
-ul.nav > li > a hover {
+#main-nav ul.nav > li > a hover {
 	-moz-transition: all 0.3s ease-in-out;
 	-webkit-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
-ul.nav > li > a{
+#main-nav ul.nav > li > a{
 	-moz-transition: all 0.3s ease-in-out;
 	-webkit-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
 
-.navbar-fixed-top .brand {
+#main-nav .brand {
     -moz-transition-delay: 0s;
     -moz-transition-duration: 0.2s;
     -moz-transition-property: all;
     -moz-transition-timing-function: linear;
     color: #000000;
-    float: right;
+    /*float: right;
+    padding-left: 0;
+    padding-right: 0;*/
     font-weight: bold;
     margin-left: 20px;
-    padding-left: 0;
-    padding-right: 0;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 30px rgba(255, 255, 255, 0.125);
 }
-.navbar-fixed-top .brand:hover {
+#main-nav .brand:hover {
     -moz-text-blink: none;
     -moz-text-decoration-color: -moz-use-text-color;
     -moz-text-decoration-line: none;
     -moz-text-decoration-style: solid;
+}
+
+/* Footer */
+.footer {
+    border-top-color: #E5E5E5;
+    border-top-style: solid;
+    border-top-width: 1px;
+    margin-top: 45px;
+    padding-bottom: 36px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 35px;
+}
+
+.footer p {
+    margin-top: 0;
+    color: #555555;
+}
+
+/* Results page*/
+#results-search-form label.control-label {
+    font-size: 16px;
+}
+
+form.medium .btn {
+    font-size: 13px;
+    height: 32px;
+    padding: 3px 8px;
+}
+
+form.medium input[type="text"] {
+    font-size: 14px;
+    height: 20px;
+    padding: 5px 10px;
+}
+
+#results-search-form form, #results-search-form .control-group {
+    margin-bottom: 0;
 }

@@ -1,11 +1,13 @@
 <metal:main use-macro="load: document.pt">
 
 	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div id="home" class="hero-unit" metal:fill-slot="content">
-		<h1>Find Professors</h1>
-		<p>Type in a name, field of study or location.</p>
+	<div id="home" class="row hero-unit" metal:fill-slot="content">
+		<div class="span10 offset2 hero">
+			<h1>Find Professors</h1>
+		</div>
 
-		<form id="profs-serach-form" class="large" action="/search" method="POST">
+		<form id="profs-serach-form" class="large span10 offset2" action="/search" method="POST">
+			<p>Get started! Try searching for a name, field of study or location.</p>
 			<div class="input-append">
 				<input id="find-profs" class="" type="text" size="40" name="query" placeholder="find...">
 				<button class="btn btn-primary" type="submit"><i class="icon-search"></i> Search</button>

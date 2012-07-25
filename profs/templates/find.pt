@@ -1,13 +1,46 @@
 <metal:main use-macro="load: document.pt">
 
-	<!-- Main hero unit for a primary marketing message or call to action -->
-	<div id="results" class="hero-unit" metal:fill-slot="content">
-		<form id="profs-serach-form" action="/search" method="POST">
-					<div class="input-append">
-						<input id="find-profs" class="" type="text" size="40" name="query" value="${query}">
-						<button class="btn btn-primary" type="button"><i class="icon-search"></i> Search</button>
-					</div>
-			</form>
+	<div metal:fill-slot="menu_extension">
+		<form id="" class="navbar-search pull-right" action="/search" method="POST">
+			<input class="search-query span2" type="text" placeholder="find..." name="query" value="${query}">
+		</form>
+	</div>
+
+	<div id="results" class="container" metal:fill-slot="content">
+		<div class="well row" id="results-search-form">
+			<div class="span8 offset2">
+				<form id="profs-serach-form" class="form-horizontal medium" action="/search" method="POST">
+					<fieldset>
+						<div class="control-group">
+							<label for="find-profs" class="control-label">42 results found for </label>
+							<div class="controls">
+								<div class="input-append">
+									<input id="find-profs" class="" type="text" size="40" name="query" value="${query}">
+									<button class="btn btn-primary" type="button"><i class="icon-search"></i> Search</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+		<div class="row-fluid">
+			<div id="refine-bar" class="span3">
+				<ul class="nav nav-list">
+					<li class="nav-header"><i class="icon-flag"></i>Filter by country</li>
+					<li><a href="#">UK</a></li>
+					<li><a href="#">Germany</a></li>
+
+					<li class="nav-header"><i class="icon-book"></i>Filter field of study</li>
+					<li><a href="#">Computer Science</a></li>
+					<li><a href="#">Physics</a></li>
+				</ul>
+			</div>
+			<div class="span9">
+				results
+			</div>
+		</div>
 	</div>
 
 </metal:main>
