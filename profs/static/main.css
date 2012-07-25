@@ -90,3 +90,42 @@ form.medium input[type="text"] {
 #results-search-form form, #results-search-form .control-group {
     margin-bottom: 0;
 }
+
+#results-list {
+    min-height: 300px;
+
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    margin-left: 0;
+}
+
+#results-pagination {
+
+}
+
+.search-result {
+
+}
+
+.preview {
+    position: relative;
+    z-index: 10;
+    background-color: #fff;
+    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.08);
+    padding: 7px 10px;
+}
+
+.info {
+    position: relative;
+    top: -5px;
+    padding-bottom: 0;
+    padding-top: 10px;
+}
+
+ul.data {
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    margin-left: 0;
+}

@@ -56,7 +56,7 @@
 					Code licensed under the
 					<a target="_blank" href="http://www.apache.org/licenses/LICENSE-2.0">Apache License v2.0</a>. 
 					Fork me on <a href="https://github.com/domoritz/Professors" target="_blank">Github</a>.
-					This app has the version ${__version__}.
+					This site is running version ${__version__} of the app.
 				</p>
 			</footer>
 

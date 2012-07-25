@@ -32,13 +32,55 @@
 					<li><a href="#">UK</a></li>
 					<li><a href="#">Germany</a></li>
 
-					<li class="nav-header"><i class="icon-book"></i>Filter field of study</li>
+					<li class="nav-header"><i class="icon-book"></i>Filter by field of study</li>
 					<li><a href="#">Computer Science</a></li>
 					<li><a href="#">Physics</a></li>
+
+					<li class="divider"></li>
+					<li><a href="#"><i class="icon-filter"></i>Clear filters</a></li>
 				</ul>
 			</div>
 			<div class="span9">
-				results
+				<ul id="results-list" class="row">
+					<li class="search-result">
+						<div class="preview thumbnail">
+							<h3><a href="#">Foo Bar</a></h3>
+						</div>
+						<div class="info well">
+							<ul class="data">
+								<li><i class="icon-briefcase"></i> University of London</li>
+								<li><i class="icon-globe"></i> United Kingdom</li>
+								<li><i class="icon-book"></i> Computer Science</li>
+							</ul>
+						</div>
+					</li>
+					<li class="search-result">
+						<div class="preview thumbnail">
+							<h3><a href="#">Foo Bar</a></h3>
+						</div>
+						<div class="info well">
+							<ul class="data">
+								<li><i class="icon-briefcase"></i> University of London</li>
+								<li><i class="icon-globe"></i> United Kingdom</li>
+								<li><i class="icon-book"></i> Computer Science</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+
+				<div id="results-pagination" class="pagination pagination-centered">
+					<ul>
+						<li><a href="#">Prev</a></li>
+						<li class="active">
+							<a href="#">1</a>
+						</li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">Next</a></li>
+					</ul>
+				</div>
+
 			</div>
 		</div>
 	</div>
