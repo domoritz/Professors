@@ -5,11 +5,11 @@
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
 	<meta name="keywords" content="python web application" />
 	<meta name="description" content="Professors on PopIt" />
-	<link rel="shortcut icon" href="${request.static_url('profs:static/favicon.ico')}" />
-	<link rel="stylesheet" href="${request.static_url('profs:static/bootstrap/css/bootstrap.css')}" type="text/css" media="screen" charset="utf-8" />
-	<link rel="stylesheet" href="${request.static_url('profs:static/bootstrap/css/bootstrap-responsive.css')}" type="text/css" media="screen" charset="utf-8" />
-	<link rel="stylesheet" href="${request.static_url('profs:static/awesome/css/font-awesome.css')}">
-	<link rel="stylesheet" href="${request.static_url('profs:static/main.css')}" type="text/css" media="screen" charset="utf-8" />
+	<link rel="shortcut icon" href="${request.static_path('profs:static/favicon.ico')}" />
+	<link rel="stylesheet" href="${request.static_path('profs:static/bootstrap/css/bootstrap.css')}" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="${request.static_path('profs:static/bootstrap/css/bootstrap-responsive.css')}" type="text/css" media="screen" charset="utf-8" />
+	<link rel="stylesheet" href="${request.static_path('profs:static/awesome/css/font-awesome.css')}">
+	<link rel="stylesheet" href="${request.static_path('profs:static/main.css')}" type="text/css" media="screen" charset="utf-8" />
 	<!--[if lte IE 6]>
 	<link rel="stylesheet" href="${request.static_url('profs:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
 	<![endif]-->
@@ -24,12 +24,12 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</a>
-					<a class="brand" href="#">Professors</a>
+					<a class="brand" href="/">Professors</a>
 					<div class="nav-collapse">
 						<ul class="nav">
-							<li class="active"><a href="/"><i class="icon-home"></i> Home</a></li>
+							<li class="active"><a href="/"><i class="icon-home"></i> Home</a>
+							</li><li><a href="#FIXME"><i class="icon-asterisk"></i> Explore</a></li>
 							<li><a href="#FIXME"><i class="icon-cloud"></i> Api</a></li>
-							<li><a href="#FIXME"><i class="icon-comments"></i> About</a></li>
 						</ul>
 					</div><!--/.nav-collapse -->
 				</div>
@@ -48,7 +48,7 @@
 
 		</div> <!-- /container -->
 
-		<script type="text/javascript" src="${request.static_url('profs:static/jquery/jquery-1.7.2.js')}" />
-		<script type="text/javascript" src="${request.static_url('profs:static/bootstrap/js/bootstrap.js')}" />
+		<script type="text/javascript" src="${request.static_path('profs:static/jquery/jquery-1.7.2.js')}"></script>
+		<script type="text/javascript" src="${request.static_path('profs:static/bootstrap/js/bootstrap.js')}"></script>
 </body>
 </html>
