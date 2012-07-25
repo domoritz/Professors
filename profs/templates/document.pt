@@ -43,7 +43,11 @@
 			<hr>
 
 			<footer>
-				<p>&copy; Professors 2012</p>
+				<?python 
+					import pkg_resources  # part of setuptools
+					__version__ = pkg_resources.require("profs")[0].version
+				?>
+				<p>&copy; Professors 2012, Version ${__version__}</p>
 			</footer>
 
 		</div> <!-- /container -->
