@@ -1,20 +1,22 @@
 Metadata-Version: 1.0
 Name: profs
-Version: 0.0
+Version: 0.1
 Summary: profs
 Home-page: UNKNOWN
-Author: UNKNOWN
+Author: Dominik Moritz
 Author-email: UNKNOWN
 License: UNKNOWN
-Description: profs README
+Description: Professors
+        ==========
         
+        A Professors repository built on top of PopIt
         
         0.0
         ---
         
         -  Initial version
         
-Keywords: web pyramid pylons
+Keywords: web popit professors
 Platform: UNKNOWN
 Classifier: Programming Language :: Python
 Classifier: Framework :: Pylons
