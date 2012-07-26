@@ -1,0 +1,3 @@
+[submodule "profs/libs/popit"]
+	path = profs/libs/popit
+	url = https://github.com/domoritz/popit-python
