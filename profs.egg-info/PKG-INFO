@@ -6,17 +6,7 @@ Home-page: UNKNOWN
 Author: Dominik Moritz
 Author-email: UNKNOWN
 License: Apache 2
-Description: #Professors
-        A Professors repository built on top of PopIt
-        
-        
-        ## Run the tests
-        
-        	python setup.py nosetests
-        	
-        This command will also print the test coverage. 
-        
-        0.1
+Description: 0.1
         ---
         
         -  Initial version
@@ -26,4 +16,4 @@ Description: #Professors
         -  100% Test coverage
 Keywords: web popit professors
 Platform: UNKNOWN
-Classifier: Open Data :: Professors
+Classifier: Open Data :: People :: Professors

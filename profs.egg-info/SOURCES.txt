@@ -14,6 +14,12 @@ profs.egg-info/entry_points.txt
 profs.egg-info/not-zip-safe
 profs.egg-info/requires.txt
 profs.egg-info/top_level.txt
+profs/libs/__init__.py
+profs/libs/popit/__init__.py
+profs/libs/popit/config_example.py
+profs/libs/popit/example.py
+profs/libs/popit/popit.py
+profs/libs/popit/test.py
 profs/static/favicon.ico
 profs/static/footerbg.png
 profs/static/headerbg.png

@@ -13,14 +13,16 @@ requires = [
     'WebTest',
     'nose',
     'coverage',
+    'slumber',
+    'oktest',
     ]
 
 setup(name='profs',
       version='0.2',
       description='A repository for data on professors.',
-      long_description=README + '\n\n' +  CHANGES,
+      long_description=CHANGES,
       classifiers=[
-        "Open Data :: Professors",
+        "Open Data :: People :: Professors",
         ],
       author='Dominik Moritz',
       author_email='',

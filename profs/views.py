@@ -1,5 +1,6 @@
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
+from libs.popit.popit import PopIt
 
 @view_config(route_name='home', renderer='templates/home.pt')
 def home_view(request):
