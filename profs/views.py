@@ -8,6 +8,7 @@ from pprint import pprint as pp
 log = logging.getLogger(__name__)
 
 
+api = None
 try:
 	api = PopIt(instance = 'professors', hostname = '127-0-0-1.org.uk', port = 3000, user = 'test@test.co.uk', password = 'tJo1zBum')
 except ConnectionError, e:
