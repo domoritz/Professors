@@ -1,6 +1,6 @@
 import unittest
 
-from oktest import ok, test
+from oktest import ok, test, DIFF
 
 from pyramid import testing
 from pyramid.testing import DummyRequest
@@ -11,6 +11,8 @@ from pyramid.compat import url_quote, url_unquote
 
 # import for testing
 from views import *
+
+DIFF = repr
 
 class UnitTests(unittest.TestCase):
 	@test("query parser parses popit id")
@@ -25,6 +27,7 @@ class UnitTests(unittest.TestCase):
 		parsed = qp.parse('id:23h4jk345 id:hsdfsdfwe34')
 		ok(parsed) == {'id':['23h4jk345', 'hsdfsdfwe34']}
 
+
 class ViewTests(unittest.TestCase):
 	def setUp(self):
 		self.config = testing.setUp()
@@ -37,7 +40,7 @@ class ViewTests(unittest.TestCase):
 		from .views import home_view
 		request = DummyRequest()
 		response = home_view(request)
-		ok(response['project']) == 'Professors'
+		ok(response['error']) == None
 
 	@test("results view")
 	def _(self):
@@ -47,6 +50,7 @@ class ViewTests(unittest.TestCase):
 		request.matchdict = {'query': q}
 		response = results_view(request)
 
+		ok(response['error']) == None
 		ok(response['query']) == q
 
 
