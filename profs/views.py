@@ -45,7 +45,6 @@ def results_view(request):
 
 	except Exception, e:
 		log.warn(e)
-		raise e
 		error = e
 
 	return {'query': query, 'results': results, 'error': error}

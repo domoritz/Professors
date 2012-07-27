@@ -24,4 +24,4 @@ This command will also print the test coverage.
 
 ## Some notes for developers
 
-There is a libs folder in `/profs/` which contains a git submodule with a reference to the python wrapper for the popit API. The original repository can be found on [github](https://github.com/domoritz/popit-python).
+There is a libs folder in `/profs/` which contains a git submodule with a reference to the python wrapper for the popit API. The original repository can be found on [github](https://github.com/domoritz/popit-python). So don't forget to init and update the submodule.
