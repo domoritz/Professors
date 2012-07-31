@@ -1,4 +1,6 @@
 from pyramid.config import Configurator
+from pyramid.events import subscriber
+from pyramid.events import BeforeRender
 
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.
@@ -13,3 +15,7 @@ def main(global_config, **settings):
 	
 	config.scan()
 	return config.make_wsgi_app()
+
+@subscriber(BeforeRender)
+def add_global(event):
+    event['tmpl_context'] = event
