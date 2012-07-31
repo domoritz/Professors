@@ -58,7 +58,9 @@
 					
 					<li tal:repeat="item results">
   						<div class="preview thumbnail">
-							<h3><a href="#" tal:content="item.name">Name</a></h3>
+							<h3 tal:define="url request.route_url('details', slug=item._id)">
+								<a href="${url}" tal:content="item.name">Name</a>
+							</h3>
 						</div>
 						<div class="info well">
 							<ul class="data">
