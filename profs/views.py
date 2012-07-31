@@ -30,9 +30,17 @@ def search_view(request):
 @view_config(route_name='details', renderer='templates/details.pt')
 def details_view(request):
 	slug = request.matchdict['slug']
+	item = {}
 	error = None
 
-	item = {'name': 'foo', 'summary': 'bar'}
+	if not api:
+		return {'error': 'Server error 500, Cannot connect to PopIt.'}
+
+	try:
+		item = api.person(slug).get()['result']
+	except Exception, e:
+		log.warn(e)
+		error = e
 
 	return dict(item = item, error = error)
 

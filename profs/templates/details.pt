@@ -3,22 +3,42 @@
 	<div metal:fill-slot="menu_extension">
 		<form id="" class="navbar-search pull-right" action="/search" method="POST">
 			<input class="search-query span2" type="text" placeholder="find..." name="query" value="">
-		</form>
+			</form>
 	</div>
 
 	<div id="" class="container" metal:fill-slot="content">
-		<div id="" class="row" tal:condition="exists:item">
-			<div class="preview thumbnail">
-				<h3><a href="#" tal:content="item.name">Name</a></h3>
-			</div>
-			<div class="info well">
-				<ul class="data">
-					<li><i class="icon-user"></i> <span tal:content="item.summary"></span></li>
-				</ul>
-				<span tal:repeat="tag item" class="label label-info tag">
-					<i class="icon-tag"></i> <span tal:content="tag"></span>
-				</span>
-			</div>
+		<div tal:condition="exists:item">
+
+			<header>
+				<h1 tal:content="item.name">Name</h1>
+				<p class="lead" tal:content="item.summary"></p>
+			</header>
+
+
+			<section class="container">
+				<div class="row">
+					<div class="span8">
+						<div class="page-header">
+							<h2>
+								Personal Data
+								<small>Birthplace, Name and stuff</small>
+							</h2>
+						</div>
+						
+						<div>
+							<span tal:repeat="tag item" class="label label-info tag">
+								<i class="icon-tag"></i> <span tal:content="tag"></span>
+							</span>
+						</div>
+					</div>
+
+					<div id="infobar" class="span4">
+						information and links
+					</div>
+				</div>
+
+			</section>
+
 		</div>
 	</div>
 
