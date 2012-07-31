@@ -52,6 +52,7 @@
 		<metal:content define-slot="content" />
 
 		<footer class="footer">
+    		<!--! Get the version number -->
 			<?python 
 				import pkg_resources  # part of setuptools
 				__version__ = pkg_resources.require("profs")[0].version

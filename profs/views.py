@@ -35,6 +35,9 @@ def results_view(request):
 
 	qp = QueryParser()
 	parsed = qp.parse(query)
+
+	if not api:
+		return {'error': 'Server error 500, Cannot connect to PopIt.'}
 	
 	try:
 		if parsed.has_key('id'):

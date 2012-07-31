@@ -1,18 +1,18 @@
 <metal:main use-macro="load: document.pt">
 
-	<div metal:fill-slot="menu_extension">
+	<div metal:fill-slot="menu_extension" tal:condition="exists:query">
 		<form id="" class="navbar-search pull-right" action="/search" method="POST">
 			<input class="search-query span2" type="text" placeholder="find..." name="query" value="${query}">
 		</form>
 	</div>
 
-	<div id="results" class="container" metal:fill-slot="content">
+	<div id="results" class="container" metal:fill-slot="content" tal:condition="exists:query">
 		<div class="well" id="results-search-form">
 			<div class="offset2">
 				<form id="profs-serach-form" class="form-horizontal medium" action="/search" method="POST">
 					<fieldset>
 						<div class="control-group">
-							<label for="find-profs" class="control-label"><span class="badge badge-info">${len(results)}</span> results found for </label>
+							<label for="find-profs" class="control-label"><span class="badge badge-info" tal:content="len(results)">0</span> results found for </label>
 							<div class="controls">
 								<div class="input-append">
 									<input id="find-profs" class="" type="text" size="40" name="query" value="${query}">
@@ -43,7 +43,7 @@
 			<div class="span9">
 
 				<div tal:condition="not results" class="" id="no-results">
-					<p class="lead">Your search - <strong>${query}</strong> - did not return any results.</p>
+					<p class="lead">Your search - <strong tal:content="query"></strong> - did not return any results.</p>
 					<p>
 						Suggestions:
 						<ul>
@@ -54,7 +54,7 @@
 					</p>
 				</div>
 
-				<ul id="results-list" class="row">
+				<ul id="results-list" class="row" tal:condition="exists:results">
 					
 					<li tal:repeat="item results">
   						<div class="preview thumbnail">
