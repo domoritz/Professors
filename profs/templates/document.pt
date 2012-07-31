@@ -27,7 +27,7 @@
 				<a class="brand" href="/">Professors</a>
 				<div class="nav-collapse">
 					<ul class="nav">
-						<li class="active"><a href="/"><i class="icon-home"></i> Home</a>
+						<li tal:attributes="class 'active' if tmpl_context.renderer_name == 'templates/home.pt' else default"><a href="/"><i class="icon-home"></i> Home</a>
 						</li><li><a href="#FIXME"><i class="icon-asterisk"></i> Explore</a></li>
 						<li><a href="#FIXME"><i class="icon-cloud"></i> Api</a></li>
 					</ul>
