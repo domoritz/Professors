@@ -27,6 +27,16 @@ def search_view(request):
 	return HTTPFound(location=url)
 
 
+@view_config(route_name='details', renderer='templates/details.pt')
+def details_view(request):
+	slug = request.matchdict['slug']
+	error = None
+
+	item = {'name': 'foo', 'summary': 'bar'}
+
+	return dict(item = item, error = error)
+
+
 @view_config(route_name='find', renderer='templates/find.pt')
 def results_view(request):
 	query = request.matchdict['query']
