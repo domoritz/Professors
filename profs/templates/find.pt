@@ -54,9 +54,9 @@
 					</p>
 				</div>
 
-				<ul id="results-list" class="row" tal:condition="exists:results">
+				<div id="results-list" class="row" tal:condition="exists:results">
 					
-					<li tal:repeat="item results">
+					<section tal:repeat="item results">
   						<div class="preview thumbnail">
 							<h3 tal:define="url request.route_url('details', slug=item._id)">
 								<a href="${url}" tal:content="item.name">Name</a>
@@ -70,9 +70,9 @@
 								<i class="icon-tag"></i> <span tal:content="tag"></span>
 							</span>
 						</div>
-					</li>
+					</section>
 
-				</ul>
+				</div>
 
 				<div id="results-pagination" class="pagination pagination-centered">
 					<ul>
