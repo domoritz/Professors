@@ -16,7 +16,7 @@ except ConnectionError, e:
 
 @view_config(route_name='home', renderer='templates/home.pt')
 def home_view(request):
-	return {'error': None}
+	return dict(error = None)
 
 
 @view_config(route_name='search', request_method='POST')
@@ -51,7 +51,7 @@ def results_view(request):
 		log.warn(e)
 		error = e
 
-	return {'query': query, 'results': results, 'error': error}
+	return dict(query = query, results = results, error = error)
 
 
 class QueryParser(object):
