@@ -5,6 +5,8 @@ from pyramid.events import BeforeRender
 import logging
 from libs.popit.popit import PopIt, ConnectionError
 
+api = None
+
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.
 	"""
@@ -26,6 +28,7 @@ def main(global_config, **settings):
 @subscriber(BeforeRender)
 def add_global(event):
 	event['tmpl_context'] = event
+	event['error'] = None
 
 
 def connect_to_popit(settings):

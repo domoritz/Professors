@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 @view_config(route_name='home', renderer='templates/home.pt')
 def home_view(request):
-	return dict(error = None)
+	return dict()
 
 
 @view_config(route_name='search', request_method='POST')
