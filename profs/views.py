@@ -34,7 +34,7 @@ def details_view(request):
 		item = get_api().person(slug).get()['result']
 	except Exception, e:
 		log.warn(e)
-		error = str(e)
+		error = e
 
 	return dict(item = item, error = error)
 
@@ -61,7 +61,7 @@ def results_view(request):
 
 	except Exception, e:
 		log.warn(e)
-		error = str(e)
+		error = e
 
 	return dict(query = query, results = results, error = error)
 

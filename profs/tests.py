@@ -12,6 +12,10 @@ from pyramid.compat import url_quote, url_unquote
 # import for testing
 from views import *
 
+from .views import home_view
+from .views import results_view
+from .views import details_view
+
 DIFF = repr
 
 class UnitTests(unittest.TestCase):
@@ -37,24 +41,21 @@ class UnitTests(unittest.TestCase):
 class ViewTests(unittest.TestCase):
 	def setUp(self):
 		self.config = testing.setUp()
+		self.request = DummyRequest()
 
 	def tearDown(self):
 		testing.tearDown()
 
 	@test("home view should return context dictionary")
 	def _(self):
-		from .views import home_view
-		request = DummyRequest()
-		response = home_view(request)
+		response = home_view(self.request)
 		ok(response['error']) == None
 
 	@test("results view should return context dictionary")
 	def _(self):
-		from .views import results_view
-		request = DummyRequest()
 		q = 'foo bar'
-		request.matchdict = {'query': q}
-		response = results_view(request)
+		self.request.matchdict = {'query': q}
+		response = results_view(self.request)
 
 		ok(response['error']) == None
 		ok(response['query']) == q
@@ -62,55 +63,45 @@ class ViewTests(unittest.TestCase):
 
 	@test("results view should show all results on search for all")
 	def _(self):
-		from .views import results_view
-		request = DummyRequest()
 		q = 'all'
-		request.matchdict = {'query': q}
-		response = results_view(request)
+		self.request.matchdict = {'query': q}
+		response = results_view(self.request)
 
 		ok(response['results']) == [{'name': 'Albert'}, {'name': 'Erwin'}]
 
 	@test("results view should show results for search for id")
 	def _(self):
-		from .views import results_view
-		request = DummyRequest()
 		q = 'id:albert-einstein'
-		request.matchdict = {'query': q}
-		response = results_view(request)
+		self.request.matchdict = {'query': q}
+		response = results_view(self.request)
 
 		ok(response['results']) == [{'name': 'Albert'}]
 
 	@test("results view should return error for non existing id")
 	def _(self):
-		from .views import results_view
-		request = DummyRequest()
 		q = 'id:non-existing-slug'
-		request.matchdict = {'query': q}
-		response = results_view(request)
+		self.request.matchdict = {'query': q}
+		response = results_view(self.request)
 
-		ok(response['error']).is_a(str)
+		ok(response['error']).is_a(Exception)
 		ok(response['results']) == []
 
 	@test("details view should return context dictionary")
 	def _(self):
-		from .views import details_view
-		request = DummyRequest()
 		slug = 'albert-einstein'
-		request.matchdict = {'slug': slug}
-		response = details_view(request)
+		self.request.matchdict = {'slug': slug}
+		response = details_view(self.request)
 
 		ok(response['error']) == None
 		ok(response['item']) == {'name': 'Albert'}
 
 	@test("wrong slug for details should return error")
 	def _(self):
-		from .views import details_view
-		request = DummyRequest()
 		slug = 'non existing slug'
-		request.matchdict = {'slug': slug}
-		response = details_view(request)
+		self.request.matchdict = {'slug': slug}
+		response = details_view(self.request)
 
-		ok(response['error']).is_a(str)
+		ok(response['error']).is_a(Exception)
 		ok(response['item']).is_a(dict).length(0)
 
 
