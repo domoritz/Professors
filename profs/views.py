@@ -1,26 +1,13 @@
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
 
-from libs.popit.popit import PopIt, ConnectionError
 import re
 import logging
 from pprint import pprint as pp
-from profs import profs_settings as settings
+from profs import api
 
 
 log = logging.getLogger(__name__)
-
-def connect_to_popit():
-	try:
-		return PopIt(instance = settings['popit.instance'], \
-			hostname = settings['popit.hostname'], \
-			port = settings['popit.port'], \
-			user = settings['popit.user'], \
-			password = settings['popit.password'])
-	except ConnectionError, e:
-		log.error("Cannot connect to PopIt. \n%s",str(e))
-
-api = connect_to_popit()
 
 
 @view_config(route_name='home', renderer='templates/home.pt')
@@ -43,6 +30,7 @@ def details_view(request):
 	error = None
 
 	if not api:
+		log.debug(api)
 		return {'error': 'Server error 500, Not connected to PopIt.'}
 
 	try:
@@ -64,6 +52,7 @@ def results_view(request):
 	parsed = qp.parse(query)
 
 	if not api:
+		log.debug(api)
 		return {'error': 'Server error 500, Not connected to PopIt.'}
 	
 	try:
