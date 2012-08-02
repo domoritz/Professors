@@ -70,6 +70,27 @@ class ViewTests(unittest.TestCase):
 
 		ok(response['results']) == [{'name': 'Albert'}, {'name': 'Erwin'}]
 
+	@test("results view should show results for search for id")
+	def _(self):
+		from .views import results_view
+		request = DummyRequest()
+		q = 'id:albert-einstein'
+		request.matchdict = {'query': q}
+		response = results_view(request)
+
+		ok(response['results']) == [{'name': 'Albert'}]
+
+	@test("results view should return error for non existing id")
+	def _(self):
+		from .views import results_view
+		request = DummyRequest()
+		q = 'id:non-existing-slug'
+		request.matchdict = {'query': q}
+		response = results_view(request)
+
+		ok(response['error']).is_a(str)
+		ok(response['results']) == []
+
 	@test("details view should return context dictionary")
 	def _(self):
 		from .views import details_view
@@ -80,6 +101,17 @@ class ViewTests(unittest.TestCase):
 
 		ok(response['error']) == None
 		ok(response['item']) == {'name': 'Albert'}
+
+	@test("wrong slug for details should return error")
+	def _(self):
+		from .views import details_view
+		request = DummyRequest()
+		slug = 'non existing slug'
+		request.matchdict = {'slug': slug}
+		response = details_view(request)
+
+		ok(response['error']).is_a(str)
+		ok(response['item']).is_a(dict).length(0)
 
 
 class FunctionalTests(unittest.TestCase):

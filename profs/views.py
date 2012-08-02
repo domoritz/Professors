@@ -34,7 +34,7 @@ def details_view(request):
 		item = get_api().person(slug).get()['result']
 	except Exception, e:
 		log.warn(e)
-		error = e
+		error = str(e)
 
 	return dict(item = item, error = error)
 
@@ -52,15 +52,16 @@ def results_view(request):
 		return HTTPServerError(detail='Cannot connect to Popit')
 	try:
 		if parsed.has_key('id'):
-			id = parsed['id'][0]
-			results = [get_api().person(id).get()['result']]
+			results = []
+			for id in parsed['id']:
+				results.append(get_api().person(id).get()['result'])
 
 		if parsed.has_key('word') and 'all' in parsed['word']:
 			results = get_api().person.get()['results']
 
 	except Exception, e:
 		log.warn(e)
-		error = e
+		error = str(e)
 
 	return dict(query = query, results = results, error = error)
 
