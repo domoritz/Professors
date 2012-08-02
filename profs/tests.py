@@ -58,6 +58,17 @@ class ViewTests(unittest.TestCase):
 
 		ok(response['error']) == None
 		ok(response['query']) == q
+		ok(response['results']) == {} # no results
+
+	@test("results view should show all results on search for all")
+	def _(self):
+		from .views import results_view
+		request = DummyRequest()
+		q = 'all'
+		request.matchdict = {'query': q}
+		response = results_view(request)
+
+		ok(response['results']) == [{'name': 'Albert'}, {'name': 'Erwin'}]
 
 	@test("details view should return context dictionary")
 	def _(self):
@@ -67,7 +78,7 @@ class ViewTests(unittest.TestCase):
 		request.matchdict = {'slug': slug}
 		response = details_view(request)
 
-		#ok(response['error']) == None
+		ok(response['error']) == None
 		ok(response['item']) == {'name': 'Albert'}
 
 
@@ -102,20 +113,28 @@ class FunctionalTests(unittest.TestCase):
 		ok('id="results"').in_(res.body)
 
 
+class Get():
+	def __init__(self, d):
+		self.d = d
 
-class Person(object):
-	def __call__(self, key, *args):
-		print key
-		print args
-		if key == 'albert-einstein':
-			return {'name': 'Albert'}
-		return [{'name': 'Albert'}]
+	def get(self):
+		return self.d
 
-class PopitMock(object):
+class Person():
+	def __call__(self, *args, **kwargs):
+		if len(args) and args[0] == 'albert-einstein':
+			return Get({'result': {'name': 'Albert'}})
+		raise Exception()
+
+	def get(self):
+		return {'results': [{'name': 'Albert'}, {'name': 'Erwin'}]}
+
+class PopitMock():
 	"""a mock object so that we can test the behaviour of 
 	this app instead of popit itself"""
-	def __init__(self):
-		super(PopitMock, self).__init__()
 
 	def __getattr__(self, key):
 		return Person()
+
+	def __nonzero__(self):
+		return True
