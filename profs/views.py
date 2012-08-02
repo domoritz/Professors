@@ -4,7 +4,7 @@ from pyramid.httpexceptions import HTTPFound, HTTPServerError
 import re
 import logging
 from pprint import pprint as pp
-from profs import get_api
+from profs import api as get_api
 
 
 log = logging.getLogger(__name__)

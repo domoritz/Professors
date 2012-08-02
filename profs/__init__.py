@@ -5,9 +5,18 @@ from pyramid.events import BeforeRender
 import logging
 from libs.popit.popit import PopIt, ConnectionError
 
-api = None
-def get_api():
-	return api
+#def get_api():
+#	return api
+
+class Api(object):
+	def __init__(self):
+		self.api = None
+	def set_api(self, a):
+		self.api = a
+	def __call__(self):
+		return self.api
+
+api = Api()	
 
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.
@@ -15,8 +24,8 @@ def main(global_config, **settings):
 	config = Configurator(settings=settings)
 	config.add_static_view(name = settings["static_assets"], path = 'profs:static', cache_max_age=3600)
 
-	global api
-	api = connect_to_popit(settings)
+	#global api
+	api.set_api(connect_to_popit(settings))
 
 	config.add_route('home', '/')
 	config.add_route('search', '/search')
