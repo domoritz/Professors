@@ -1,5 +1,5 @@
 from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPFound
+from pyramid.httpexceptions import HTTPFound, HTTPServerError
 
 import re
 import logging
@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 @view_config(route_name='home', renderer='templates/home.pt')
 def home_view(request):
-	return dict()
+	return dict(error = None)
 
 
 @view_config(route_name='search', request_method='POST')
@@ -30,9 +30,7 @@ def details_view(request):
 	error = None
 
 	if not api:
-		log.debug(api)
-		return {'error': 'Server error 500, Not connected to PopIt.'}
-
+		return HTTPServerError(detail='Cannot connect to Popit')
 	try:
 		item = api.person(slug).get()['result']
 	except Exception, e:
@@ -52,9 +50,7 @@ def results_view(request):
 	parsed = qp.parse(query)
 
 	if not api:
-		log.debug(api)
-		return {'error': 'Server error 500, Not connected to PopIt.'}
-	
+		return HTTPServerError(detail='Cannot connect to Popit')
 	try:
 		if parsed.has_key('id'):
 			id = parsed['id'][0]

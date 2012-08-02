@@ -28,13 +28,13 @@ def main(global_config, **settings):
 @subscriber(BeforeRender)
 def add_global(event):
 	event['tmpl_context'] = event
-	event['error'] = None
 
 
 def connect_to_popit(settings):
-	log = logging.getLogger(__name__)
+	if not settings.has_key('popit.instance'):
+		from tests import PopitMock
+		return PopitMock()
 
-	a = None
 	try:
 		return PopIt(instance = settings['popit.instance'], \
 			hostname = settings['popit.hostname'], \
@@ -42,4 +42,5 @@ def connect_to_popit(settings):
 			user = settings['popit.user'], \
 			password = settings['popit.password'])
 	except ConnectionError, e:
+		log = logging.getLogger(__name__)
 		log.error("Cannot connect to PopIt. \n%s",str(e))

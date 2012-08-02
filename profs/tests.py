@@ -35,14 +35,14 @@ class ViewTests(unittest.TestCase):
 	def tearDown(self):
 		testing.tearDown()
 
-	@test("home view")
+	@test("home view should return context dictionary")
 	def _(self):
 		from .views import home_view
 		request = DummyRequest()
 		response = home_view(request)
 		ok(response['error']) == None
 
-	@test("results view")
+	@test("results view should return context dictionary")
 	def _(self):
 		from .views import results_view
 		request = DummyRequest()
@@ -52,6 +52,17 @@ class ViewTests(unittest.TestCase):
 
 		ok(response['error']) == None
 		ok(response['query']) == q
+
+	@test("details view should return context dictionary")
+	def _(self):
+		from .views import details_view
+		request = DummyRequest()
+		slug = 'foo-bar'
+		request.matchdict = {'slug': slug}
+		response = details_view(request)
+
+		ok(response['error']) == None
+		ok(response['slug']) == slug
 
 
 class FunctionalTests(unittest.TestCase):
@@ -83,3 +94,28 @@ class FunctionalTests(unittest.TestCase):
 	def _(self):
 		res = self.testapp.get('/find/abc', status=200)
 		ok('id="results"').in_(res.body)
+
+
+class GenericModelObject(dict):
+	""" Makes dict entries available via method calls"""
+	def __getattr__(self, key):
+		value = self[key]
+		if isinstance(value, dict):
+			return GenericModelObject(value)
+		if isinstance(value, list):
+			return GenericModelObject(value)
+		return value
+
+
+class PopitMock(object):
+	"""a mock object so that we can test the behaviour of 
+	this app instead of popit itself"""
+	def __init__(self):
+		super(PopitMock, self).__init__()
+
+	def __getattr__(self, key):
+		return GenericModelObject({'person': 'Albert'}).__call__(key)
+
+	def __str__(self):
+		return "Mock object"
+		
