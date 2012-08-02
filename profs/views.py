@@ -1,18 +1,27 @@
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPFound
+
 from libs.popit.popit import PopIt, ConnectionError
 import re
 import logging
 from pprint import pprint as pp
+from profs import profs_settings as settings
+
 
 log = logging.getLogger(__name__)
 
+def connect_to_popit():
+	try:
+		return PopIt(instance = settings['popit.instance'], \
+			hostname = settings['popit.hostname'], \
+			port = settings['popit.port'], \
+			user = settings['popit.user'], \
+			password = settings['popit.password'])
+	except ConnectionError, e:
+		log.error("Cannot connect to PopIt. \n%s",str(e))
 
-api = None
-try:
-	api = PopIt(instance = 'professors', hostname = '127-0-0-1.org.uk', port = 3000, user = 'test@test.co.uk', password = 'tJo1zBum')
-except ConnectionError, e:
-	log.error("Cannot connect to PopIt. \n%s",str(e))
+api = connect_to_popit()
+
 
 @view_config(route_name='home', renderer='templates/home.pt')
 def home_view(request):
@@ -34,7 +43,7 @@ def details_view(request):
 	error = None
 
 	if not api:
-		return {'error': 'Server error 500, Cannot connect to PopIt.'}
+		return {'error': 'Server error 500, Not connected to PopIt.'}
 
 	try:
 		item = api.person(slug).get()['result']
@@ -55,7 +64,7 @@ def results_view(request):
 	parsed = qp.parse(query)
 
 	if not api:
-		return {'error': 'Server error 500, Cannot connect to PopIt.'}
+		return {'error': 'Server error 500, Not connected to PopIt.'}
 	
 	try:
 		if parsed.has_key('id'):
