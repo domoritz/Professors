@@ -27,6 +27,12 @@ class UnitTests(unittest.TestCase):
 		parsed = qp.parse('id:23h4jk345 id:hsdfsdfwe34')
 		ok(parsed) == {'id':['23h4jk345', 'hsdfsdfwe34']}
 
+	@test("parse words")
+	def _(self):
+		qp = QueryParser()
+		parsed = qp.parse('foo bar baz')
+		ok(parsed) == {'word':['foo', 'bar', 'baz']}
+
 
 class ViewTests(unittest.TestCase):
 	def setUp(self):
@@ -57,12 +63,12 @@ class ViewTests(unittest.TestCase):
 	def _(self):
 		from .views import details_view
 		request = DummyRequest()
-		slug = 'foo-bar'
+		slug = 'albert-einstein'
 		request.matchdict = {'slug': slug}
 		response = details_view(request)
 
-		ok(response['error']) == None
-		ok(response['slug']) == slug
+		#ok(response['error']) == None
+		ok(response['item']) == {'name': 'Albert'}
 
 
 class FunctionalTests(unittest.TestCase):
@@ -96,16 +102,14 @@ class FunctionalTests(unittest.TestCase):
 		ok('id="results"').in_(res.body)
 
 
-class GenericModelObject(dict):
-	""" Makes dict entries available via method calls"""
-	def __getattr__(self, key):
-		value = self[key]
-		if isinstance(value, dict):
-			return GenericModelObject(value)
-		if isinstance(value, list):
-			return GenericModelObject(value)
-		return value
 
+class Person(object):
+	def __call__(self, key, *args):
+		print key
+		print args
+		if key == 'albert-einstein':
+			return {'name': 'Albert'}
+		return [{'name': 'Albert'}]
 
 class PopitMock(object):
 	"""a mock object so that we can test the behaviour of 
@@ -114,8 +118,4 @@ class PopitMock(object):
 		super(PopitMock, self).__init__()
 
 	def __getattr__(self, key):
-		return GenericModelObject({'person': 'Albert'}).__call__(key)
-
-	def __str__(self):
-		return "Mock object"
-		
+		return Person()

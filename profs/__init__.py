@@ -6,6 +6,8 @@ import logging
 from libs.popit.popit import PopIt, ConnectionError
 
 api = None
+def get_api():
+	return api
 
 def main(global_config, **settings):
 	""" This function returns a Pyramid WSGI application.
@@ -20,7 +22,7 @@ def main(global_config, **settings):
 	config.add_route('search', '/search')
 	config.add_route('find', '/find/{query}')
 	config.add_route('details', '/details/{slug}')
-	
+
 	config.scan()
 	return config.make_wsgi_app()
 

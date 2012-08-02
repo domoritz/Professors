@@ -4,11 +4,10 @@ from pyramid.httpexceptions import HTTPFound, HTTPServerError
 import re
 import logging
 from pprint import pprint as pp
-from profs import api
+from profs import get_api
 
 
 log = logging.getLogger(__name__)
-
 
 @view_config(route_name='home', renderer='templates/home.pt')
 def home_view(request):
@@ -29,10 +28,10 @@ def details_view(request):
 	item = {}
 	error = None
 
-	if not api:
+	if not get_api():
 		return HTTPServerError(detail='Cannot connect to Popit')
 	try:
-		item = api.person(slug).get()['result']
+		item = get_api().person(slug).get()['result']
 	except Exception, e:
 		log.warn(e)
 		error = e
@@ -49,15 +48,15 @@ def results_view(request):
 	qp = QueryParser()
 	parsed = qp.parse(query)
 
-	if not api:
+	if not get_api():
 		return HTTPServerError(detail='Cannot connect to Popit')
 	try:
 		if parsed.has_key('id'):
 			id = parsed['id'][0]
-			results = [api.person(id).get()['result']]
+			results = [get_api().person(id).get()['result']]
 
 		if parsed.has_key('word') and 'all' in parsed['word']:
-			results = api.person.get()['results']
+			results = get_api().person.get()['results']
 
 	except Exception, e:
 		log.warn(e)
