@@ -22,7 +22,7 @@ def main(global_config, **settings):
 	global public_api_port
 	if settings.has_key('popit.public_port'):
 		public_api_port = settings['popit.public_port']
-	else:
+	elif settings.has_key('popit.port'):
 		public_api_port = settings['popit.port']
 
 	connect_to_popit(settings)

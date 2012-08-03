@@ -5,4 +5,12 @@
 -  Basic homepage
 -  Basic redirection on search
 -  Set up css, js assets
--  100% Test coverage
+-  100% test coverage
+
+0.2
+---
+-  Autocompletion
+-  Details page
+-  Mockup object for testing
+-  Much better error reporting
+-  95% test coverage
