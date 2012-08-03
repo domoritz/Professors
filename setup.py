@@ -21,7 +21,7 @@ requires = [
     ]
 
 setup(name='profs',
-      version='0.2',
+      version='0.3',
       description='A repository for data on professors.',
       long_description=CHANGES,
       classifiers=[
