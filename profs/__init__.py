@@ -31,8 +31,10 @@ def main(global_config, **settings):
 @subscriber(BeforeRender)
 def add_global(event):
 	event['tmpl_context'] = event
-	event['popit_api_url'] = str(api)
-
+	if api.initialized:
+		event['popit_api_url'] = str(api)
+	else:
+		event['popit_api_url'] = "/"
 
 def connect_to_popit(settings):
 	if not settings.has_key('popit.instance'):
