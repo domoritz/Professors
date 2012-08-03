@@ -5,8 +5,10 @@ from pyramid.events import subscriber
 from pyramid.events import BeforeRender
 
 import logging
+import re
 from libs.popit.popit import PopIt, ConnectionError
 
+public_api_port = 0
 api = PopIt(lazy = True) # lazy initialization
 def get_api():
 	return api
@@ -16,6 +18,9 @@ def main(global_config, **settings):
 	"""
 	config = Configurator(settings=settings)
 	config.add_static_view(name = settings["static_assets"], path = 'profs:static', cache_max_age=3600)
+
+	if settings.has_key('popit.public_port'):
+		public_api_port =  settings['popit.public_port']
 
 	connect_to_popit(settings)
 
@@ -32,7 +37,7 @@ def main(global_config, **settings):
 def add_global(event):
 	event['tmpl_context'] = event
 	if api.initialized:
-		event['popit_api_url'] = str(api)
+		event['popit_api_url'] = re.sub('(?=\:)[0-9]{2,4}(?=/)', str(public_api_port) ,str(api))
 	else:
 		event['popit_api_url'] = "/"
 
