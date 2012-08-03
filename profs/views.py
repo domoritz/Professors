@@ -53,10 +53,13 @@ def results_view(request):
 	if not get_api():
 		return HTTPServerError(detail='Cannot connect to Popit')
 	try:
-		if parsed.has_key('id'):
+		if parsed.has_key('slug'):
 			results = []
-			for id in parsed['id']:
-				results.append(get_api().person(id).get()['result'])
+			if len(parsed['slug']) == 1:
+				url = request.route_url('details', slug=parsed['slug'][0])
+				return HTTPFound(location=url)
+			for slug in parsed['slug']:
+				results.append(get_api().person(slug).get()['result'])
 
 		if parsed.has_key('word') and 'all' in parsed['word']:
 			results = get_api().person.get()['results']

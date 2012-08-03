@@ -21,17 +21,17 @@ from .views import details_view
 DIFF = repr
 
 class UnitTests(unittest.TestCase):
-	@test("query parser parses popit id")
+	@test("query parser parses popit slug")
 	def _(self):
 		qp = QueryParser()
-		parsed = qp.parse('id:23h4jk345')
-		ok(parsed) == {'id':['23h4jk345']}
+		parsed = qp.parse('slug:23h4jk345')
+		ok(parsed) == {'slug':['23h4jk345']}
 
-	@test("query parser parses multiple popit ids")
+	@test("query parser parses multiple popit slugs")
 	def _(self):
 		qp = QueryParser()
-		parsed = qp.parse('id:23h4jk345 id:hsdfsdfwe34')
-		ok(parsed) == {'id':['23h4jk345', 'hsdfsdfwe34']}
+		parsed = qp.parse('slug:23h4jk345 slug:hsdfsdfwe34')
+		ok(parsed) == {'slug':['23h4jk345', 'hsdfsdfwe34']}
 
 	@test("parse words")
 	def _(self):
@@ -69,19 +69,19 @@ class ViewTests(unittest.TestCase):
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
-		ok(response['results']) == [{'name': 'Albert'}, {'name': 'Erwin'}]
+		ok(response['results']) == [{'name': 'Albert Einstein'}, {'name': 'Erwin Schrödinger'}]
 
-	@test("results view should show results for search for id")
+	@test("results view should show results for search for slugs")
 	def _(self):
-		q = 'id:albert-einstein'
+		q = 'slug:albert-einstein slug:erwin-schrödinger'
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
-		ok(response['results']) == [{'name': 'Albert'}]
+		ok(response['results']) == [{'name': 'Albert Einstein'}, {'name': 'Erwin Schrödinger'}]
 
-	@test("results view should return error for non existing id")
+	@test("results view should return error for non existing slug")
 	def _(self):
-		q = 'id:non-existing-slug'
+		q = 'slug:non-existing-slug'
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
@@ -95,7 +95,7 @@ class ViewTests(unittest.TestCase):
 		response = details_view(self.request)
 
 		ok(response['error']) == None
-		ok(response['item']) == {'name': 'Albert'}
+		ok(response['item']) == {'name': 'Albert Einstein'}
 
 	@test("wrong slug for details should return error")
 	def _(self):
@@ -138,6 +138,7 @@ class FunctionalTests(unittest.TestCase):
 		ok('id="results"').in_(res.body)
 
 
+
 class Get():
 	def __init__(self, d):
 		self.d = d
@@ -147,12 +148,15 @@ class Get():
 
 class Person():
 	def __call__(self, *args, **kwargs):
-		if len(args) and args[0] == 'albert-einstein':
-			return Get({'result': {'name': 'Albert'}})
+		if len(args):
+			if args[0] == 'albert-einstein':
+				return Get({'result': {'name': 'Albert Einstein'}})
+			if args[0] == 'erwin-schrödinger':
+				return Get({'result': {'name': 'Erwin Schrödinger'}})
 		raise Exception()
 
 	def get(self):
-		return {'results': [{'name': 'Albert'}, {'name': 'Erwin'}]}
+		return {'results': [{'name': 'Albert Einstein'}, {'name': 'Erwin Schrödinger'}]}
 
 class PopitMock():
 	"""a mock object so that we can test the behaviour of 
@@ -163,3 +167,6 @@ class PopitMock():
 
 	def __nonzero__(self):
 		return True
+
+	def __str__(self):
+		return "PopitMock"
