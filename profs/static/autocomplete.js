@@ -36,8 +36,13 @@ $(function(){
     			callback(null, all)
     		}
 		], function(err, results) {
-			suggestions = $.merge(results[0], results[1]);
-			response(suggestions);
+			if (err) {
+				alert("Aww snap. An error occured.\n" + err);
+				response()
+			} else {
+				suggestions = $.merge(results[0], results[1]);
+				response(suggestions);
+			}
 		});
 	}
 
