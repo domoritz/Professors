@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from pyramid.config import Configurator
 from pyramid.events import subscriber
 from pyramid.events import BeforeRender
@@ -29,6 +31,7 @@ def main(global_config, **settings):
 @subscriber(BeforeRender)
 def add_global(event):
 	event['tmpl_context'] = event
+	event['popit_api_url'] = str(api)
 
 
 def connect_to_popit(settings):

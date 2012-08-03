@@ -13,6 +13,13 @@
 	<!--[if lte IE 6]>
 	<link rel="stylesheet" href="${request.static_url('profs:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
 	<![endif]-->
+
+
+	<script type="text/javascript">
+	//<![CDATA[
+	var popitApiUrl = "${popit_api_url}/"
+	//]]>
+	</script>
 </head>
 <body>
 	
@@ -74,6 +81,9 @@
 	</div> <!-- /container -->
 
 	<script type="text/javascript" src="${request.static_path('profs:static/jquery/jquery-1.7.2.js')}"></script>
+	<script type="text/javascript" src="${request.static_path('profs:static/jquery/jquery-ui-1.8.22.custom.min.js')}"></script>
 	<script type="text/javascript" src="${request.static_path('profs:static/bootstrap/js/bootstrap.js')}"></script>
+	<script type="text/javascript" src="${request.static_path('profs:static/async/async.min.js')}"></script>
+	<script type="text/javascript" src="${request.static_path('profs:static/autocomplete.js')}"></script>
 </body>
 </html>

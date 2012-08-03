@@ -9,7 +9,7 @@
 		<form id="profs-serach-form" class="large span10 offset2" action="/search" method="POST">
 			<p>Get started! Try searching for a name, field of study or location.</p>
 			<div class="input-append">
-				<input id="find-profs" class="" type="text" size="40" name="query" placeholder="find...">
+				<input id="find-profs" class="popit-autocomplete" type="text" size="40" name="query" placeholder="find...">
 				<button class="btn btn-primary" type="submit"><i class="icon-search"></i> Search</button>
 			</div>
 		</form>
