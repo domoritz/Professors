@@ -2,7 +2,7 @@
 
 	<div metal:fill-slot="menu_extension">
 		<form id="" class="navbar-search pull-right" action="/search" method="POST">
-			<input class="search-query span2" type="text" placeholder="find..." name="query" value=""/>
+			<input class="search-query span2 popit-autocomplete" type="text" placeholder="find..." name="query" value=""/>
 		</form>
 	</div>
 
