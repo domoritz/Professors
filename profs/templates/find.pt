@@ -58,7 +58,7 @@
 					
 					<section tal:repeat="item results">
   						<div class="preview thumbnail">
-							<h3 tal:define="url request.route_url('details', slug=item.slug)">
+							<h3 tal:define="url request.route_path('details', slug=item.slug)">
 								<a href="${url}" tal:content="item.name">Name</a>
 							</h3>
 						</div>
