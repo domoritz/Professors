@@ -11,8 +11,10 @@
 
 			<header>
 				<h1 tal:content="item.name">Name</h1>
-				<p class="lead" tal:content="item.summary"></p>
-				
+				<div tal:condition="exists:item.summary">
+					<p class="lead" tal:content="item.summary"></p>
+				</div>
+
 				<a class="lead" tal:attributes="href item.meta.edit_url">[Edit this person]</a>
 			</header>
 
