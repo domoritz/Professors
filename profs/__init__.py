@@ -5,7 +5,7 @@ from pyramid.events import BeforeRender
 import logging
 from libs.popit.popit import PopIt, ConnectionError
 
-api = PopIt(lazy = True) # lazy initalization
+api = PopIt(lazy = True) # lazy initialization
 def get_api():
 	return api
 
