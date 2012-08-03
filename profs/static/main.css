@@ -242,3 +242,13 @@ ul.data {
     font-size: 14px;
     margin-top: 20px;
 }
+
+/* Details page */
+#details h2.page-header {
+    padding-bottom: 0px;
+    padding-top: 10px;
+}
+
+#details section>div {
+    margin-left: 25px;
+}

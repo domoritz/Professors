@@ -2,34 +2,91 @@
 
 	<div metal:fill-slot="menu_extension">
 		<form id="" class="navbar-search pull-right" action="/search" method="POST">
-			<input class="search-query span2" type="text" placeholder="find..." name="query" value="">
-			</form>
+			<input class="search-query span2" type="text" placeholder="find..." name="query" value=""/>
+		</form>
 	</div>
 
-	<div id="" class="container" metal:fill-slot="content">
+	<div id="details" class="container" metal:fill-slot="content">
 		<div tal:condition="exists:item">
 
 			<header>
 				<h1 tal:content="item.name">Name</h1>
 				<p class="lead" tal:content="item.summary"></p>
+				
+				<a class="lead" tal:attributes="href item.meta.edit_url">[Edit this person]</a>
 			</header>
 
-
-			<section class="container">
+			<article class="container">
 				<div class="row">
 					<div class="span8">
-						<div class="page-header">
-							<h2>
-								Personal Data
-								<small>Birthplace, Name and stuff</small>
+						<section>
+							<h2 class="page-header">
+								Professional Data
+								<small>Education, University, ...</small>
 							</h2>
-						</div>
+
+							<div tal:condition="exists:item.university">
+								<h3>University</h3>
+								<p tal:content="item.university"></p>
+							</div>
+						</section>
+
+						<section>
+							<h2 class="page-header">
+								Contact Details
+								<small>Adress, Phone, Email, ...</small>
+							</h2>
+
+							<div tal:condition="exists:item.contact_details">
+								<div tal:repeat="contactitem item.contact_details">
+									<h3 tal:content="contactitem.kind"></h3>
+									<p tal:content="contactitem.value"></p>
+								</div>
+							</div>
+						</section>
 						
-						<div>
-							<span tal:repeat="tag item" class="label label-info tag">
-								<i class="icon-tag"></i> <span tal:content="tag"></span>
-							</span>
-						</div>
+						<section>
+							<h2 class="page-header">
+								Personal Data
+								<small>Birthplace, Family, ...</small>
+							</h2>
+
+							<div tal:condition="exists:item.birthplace">
+								<h3>Birthplace</h3>
+								<p tal:content="item.birthplace"></p>
+							</div>
+						</section>
+
+						<section>
+							<h2 class="page-header">
+								Links
+								<small>Website, Wikipedia, ...</small>
+							</h2>
+
+							<div tal:condition="exists:item.links">
+								<div tal:repeat="linkitem item.links">
+									<h3 tal:content="linkitem.comment"></h3>
+									<p>
+										<a tal:attributes="href linkitem.url">
+											<span tal:content="linkitem.url"></span>
+										</a>
+									</p>
+								</div>
+							</div>
+						</section>
+
+						<section>
+							<h2 class="page-header">
+								Tags
+								<small></small>
+							</h2>
+
+							<div>
+								<span tal:repeat="tag item" class="label label-info tag">
+									<i class="icon-tag"></i> <span tal:content="tag"></span>
+								</span>
+							</div>
+						</section>
 					</div>
 
 					<div id="infobar" class="span4">
@@ -37,7 +94,7 @@
 					</div>
 				</div>
 
-			</section>
+			</article>
 
 		</div>
 	</div>
