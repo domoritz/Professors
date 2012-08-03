@@ -19,9 +19,11 @@ def main(global_config, **settings):
 	config = Configurator(settings=settings)
 	config.add_static_view(name = settings["static_assets"], path = 'profs:static', cache_max_age=3600)
 
+	global public_api_port
 	if settings.has_key('popit.public_port'):
-		global public_api_port
-		public_api_port =  settings['popit.public_port']
+		public_api_port = settings['popit.public_port']
+	else:
+		public_api_port = settings['popit.port']
 
 	connect_to_popit(settings)
 
