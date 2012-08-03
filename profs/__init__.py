@@ -20,6 +20,7 @@ def main(global_config, **settings):
 	config.add_static_view(name = settings["static_assets"], path = 'profs:static', cache_max_age=3600)
 
 	if settings.has_key('popit.public_port'):
+		global public_api_port
 		public_api_port =  settings['popit.public_port']
 
 	connect_to_popit(settings)
@@ -37,7 +38,7 @@ def main(global_config, **settings):
 def add_global(event):
 	event['tmpl_context'] = event
 	if api.initialized:
-		event['popit_api_url'] = re.sub('(?=\:)[0-9]{2,4}(?=/)', str(public_api_port) ,str(api))
+		event['popit_api_url'] = re.sub('[0-9]{2,4}(?=/)', str(public_api_port) ,str(api))
 	else:
 		event['popit_api_url'] = "/"
 
