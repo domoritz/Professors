@@ -6,7 +6,21 @@
 			<p class="lead">Get the data programatically and explore the capabilities.</p>
 		</header>
 		<p>
-			To be continued...
+			This website is built on top of PopIt. It uses its RESTful API to get the data. This means you can also use the API directly. If you want to know how to use the API, please go to the <a href="https://github.com/mysociety/popit/wiki">PopIt documentation</a>.
+		</p>
+		<p>
+			Below you can find the details of the connection details for this Website.
+			<dl class="dl-horizontal">
+				<dt>URL</dt>
+				<dd tal:content="url">The Popit URL</dd>
+				<dt>API Version</dt>
+				<dd tal:content="version">API version</dd>
+				<dt>Status</dt>
+				<dd tal:switch="online">
+					<span class="label label-success" tal:case="True">Online</span>
+					<span class="label label-important" tal:case="False">Offline</span>
+				</dd>
+			</dl>
 		</p>
 	</div>
 

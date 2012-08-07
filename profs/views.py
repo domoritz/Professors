@@ -1,23 +1,28 @@
 # -*- coding: utf-8 -*-
 
-from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPFound, HTTPServerError
+from pyramid.view import view_config, notfound_view_config
+from pyramid.httpexceptions import HTTPFound, HTTPServerError, exception_response
+from requests.exceptions import ConnectionError, HTTPError
 
 import re
 import logging
+import datetime
 from pprint import pprint as pp
 from profs import get_api
-
+from libs.popit.popit import HttpClientError
 
 log = logging.getLogger(__name__)
 
-@view_config(route_name='home', renderer='templates/home.pt')
+@view_config(route_name='home', renderer='templates/home.pt', http_cache=datetime.timedelta(hours=1))
 def home_view(request):
 	return dict(error = None)
 
 @view_config(route_name='api', renderer='templates/api.pt')
 def api_view(request):
-	return dict(error = None)
+	url = get_api().get_url()
+	version = get_api().get_api_version()
+	online = get_api().is_online()
+	return dict(error = None, version = version, url = url, online = online)
 
 @view_config(route_name='explore', renderer='templates/explore.pt')
 def explore_view(request):
