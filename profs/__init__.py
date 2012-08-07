@@ -33,18 +33,29 @@ def main(global_config, **settings):
 	config.add_route('details', '/details/{slug}')
 	config.add_route('api', '/api')
 	config.add_route('explore', '/explore')
-	
+
 	config.scan()
 	return config.make_wsgi_app()
 
 
 @subscriber(BeforeRender)
 def add_global(event):
+	event['error'] = None
 	event['tmpl_context'] = event
 	if api.initialized:
 		event['popit_api_url'] = re.sub('[0-9]{2,4}(?=/)', str(public_api_port) ,str(api))
 	else:
 		event['popit_api_url'] = "/"
+
+def cache_callback(request, response):
+    """Set the cache_control max_age for the response"""
+    response.cache_control.max_age = 360
+
+@subscriber(NewRequest)
+def add_callbacks(event):
+    request = event.request
+    request.add_response_callback(cache_callback)
+
 
 def connect_to_popit(settings):
 	if not settings.has_key('popit.instance'):
