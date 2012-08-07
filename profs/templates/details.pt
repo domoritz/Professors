@@ -7,7 +7,7 @@
 	</div>
 
 	<div id="details" class="container" metal:fill-slot="content">
-		<div tal:condition="exists:item">
+		<div tal:condition="exists:item" tal:condition="exists:item.name">
 
 			<header>
 				<h1 tal:content="item.name">Name</h1>

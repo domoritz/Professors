@@ -20,6 +20,8 @@
 	var popitApiUrl = "${popit_api_url}/"
 	//]]>
 	</script>
+
+	<script type="text/javascript" src="${request.static_path('profs:static/jquery/jquery-1.7.2.js')}"></script>
 </head>
 <body>
 	
@@ -54,10 +56,13 @@
     			<p>
     				${error}
     			</p>
+    			<p tal:condition="exists:error.details">
+    				Suggestion: ${error.details}
+    			</p>
     		</div>
 		</div>
 
-		<metal:content define-slot="content" />
+		<metal:content define-slot="content"/>
 
 		<footer class="footer">
     		<!--! Get the version number -->
@@ -69,7 +74,7 @@
 				<a href="#">Back to top</a>
 			</p>
 			<p>
-				Designed and built with all the love in the world on top of <a href="https://github.com/mysociety/popit" target="_blank">PopIt</a> using <a href="http://www.pylonsproject.org/" target="_blank">Pyramid</a>, <a href="http://twitter.github.com/bootstrap" target="_blank">Bootstrap</a> and <a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font Awesome</a> by Dominik Moritz.
+				Designed and built with all the love in the world on top of <a href="https://github.com/mysociety/popit" target="_blank">PopIt</a> using <a href="http://www.pylonsproject.org/" target="_blank">Pyramid</a>, <a href="http://twitter.github.com/bootstrap" target="_blank">Bootstrap</a> and <a href="http://fortawesome.github.com/Font-Awesome/" target="_blank">Font Awesome</a> by Dominik Moritz. 
 			</p>
 			<p>
 				Code licensed under the
@@ -81,7 +86,6 @@
 
 	</div> <!-- /container -->
 
-	<script type="text/javascript" src="${request.static_path('profs:static/jquery/jquery-1.7.2.js')}"></script>
 	<script type="text/javascript" src="${request.static_path('profs:static/jquery/jquery-ui-1.8.22.custom.min.js')}"></script>
 	<script type="text/javascript" src="${request.static_path('profs:static/bootstrap/js/bootstrap.js')}"></script>
 	<script type="text/javascript" src="${request.static_path('profs:static/async/async.min.js')}"></script>
