@@ -1,0 +1,13 @@
+<metal:main use-macro="load: document.pt">
+
+	<div id="api" class="container" metal:fill-slot="content">
+		<header id="api" class="jumbotron subhead">
+			<h1>API</h1>
+			<p class="lead">Get the data programatically and explore the capabilities.</p>
+		</header>
+		<p>
+			To be continued...
+		</p>
+	</div>
+
+</metal:main>

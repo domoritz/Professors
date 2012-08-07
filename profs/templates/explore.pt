@@ -1,0 +1,13 @@
+<metal:main use-macro="load: document.pt">
+
+	<div id="explore" class="container" metal:fill-slot="content">
+		<header id="explore" class="jumbotron subhead">
+			<h1>Explore</h1>
+			<p class="lead">Explore the data.</p>
+		</header>
+		<p>
+			To be continued...
+		</p>
+	</div>
+
+</metal:main>

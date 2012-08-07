@@ -31,7 +31,9 @@ def main(global_config, **settings):
 	config.add_route('search', '/search')
 	config.add_route('find', '/find/{query}')
 	config.add_route('details', '/details/{slug}')
-
+	config.add_route('api', '/api')
+	config.add_route('explore', '/explore')
+	
 	config.scan()
 	return config.make_wsgi_app()
 

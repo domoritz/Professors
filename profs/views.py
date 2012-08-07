@@ -15,6 +15,14 @@ log = logging.getLogger(__name__)
 def home_view(request):
 	return dict(error = None)
 
+@view_config(route_name='api', renderer='templates/api.pt')
+def api_view(request):
+	return dict(error = None)
+
+@view_config(route_name='explore', renderer='templates/explore.pt')
+def explore_view(request):
+	return dict(error = None)
+
 
 @view_config(route_name='search', request_method='POST')
 def search_view(request):

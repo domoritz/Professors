@@ -137,6 +137,16 @@ class FunctionalTests(unittest.TestCase):
 		res = self.testapp.get('/find/abc', status=200)
 		ok('id="results"').in_(res.body)
 
+	@test("api page returns 200")
+	def _(self):
+		res = self.testapp.get('/api', status=200)
+		ok('id="api"').in_(res.body)
+
+	@test("explore page returns 200")
+	def _(self):
+		res = self.testapp.get('/explore', status=200)
+		ok('id="explore"').in_(res.body)
+
 
 
 class Get():
