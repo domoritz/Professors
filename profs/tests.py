@@ -8,6 +8,7 @@ from pyramid import testing
 from pyramid.testing import DummyRequest
 from pyramid.testing import DummyResource
 from pyramid.compat import url_quote, url_unquote
+from libs.popit.popit import HttpClientError
 
 # uses oktest http://www.kuwata-lab.com/oktest/oktest-py_users-guide.html
 
@@ -19,6 +20,8 @@ from .views import results_view
 from .views import details_view
 
 DIFF = repr
+
+einstein = {'name': 'Albert Einstein', 'summary': 'E=m*c^2', 'meta': {'edit_url': 'editmock'}}
 
 class UnitTests(unittest.TestCase):
 	@test("query parser parses popit slug")
@@ -53,6 +56,14 @@ class ViewTests(unittest.TestCase):
 		response = home_view(self.request)
 		ok(response['error']) == None
 
+	@test("api view should return context dictionary")
+	def _(self):
+		response = api_view(self.request)
+		ok(response['version']) == "versionmock"
+		ok(response['online']) == True
+		ok(response['url']) == "urlmock"
+		ok(response['error']) == None
+
 	@test("results view should return context dictionary")
 	def _(self):
 		q = 'foo bar'
@@ -69,7 +80,7 @@ class ViewTests(unittest.TestCase):
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
-		ok(response['results']) == [{'name': 'Albert Einstein'}, {'name': 'Erwin Schrödinger'}]
+		ok(response['results']) == [einstein, {'name': 'Erwin Schrödinger'}]
 
 	@test("results view should show results for search for slugs")
 	def _(self):
@@ -77,16 +88,7 @@ class ViewTests(unittest.TestCase):
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
-		ok(response['results']) == [{'name': 'Albert Einstein'}, {'name': 'Erwin Schrödinger'}]
-
-	@test("results view should return error for non existing slug")
-	def _(self):
-		q = 'slug:non-existing-slug'
-		self.request.matchdict = {'query': q}
-		response = results_view(self.request)
-
-		ok(response['error']).is_a(Exception)
-		ok(response['results']) == []
+		ok(response['results']) == [einstein, {'name': 'Erwin Schrödinger'}]
 
 	@test("details view should return context dictionary")
 	def _(self):
@@ -95,16 +97,7 @@ class ViewTests(unittest.TestCase):
 		response = details_view(self.request)
 
 		ok(response['error']) == None
-		ok(response['item']) == {'name': 'Albert Einstein'}
-
-	@test("wrong slug for details should return error")
-	def _(self):
-		slug = 'non existing slug'
-		self.request.matchdict = {'slug': slug}
-		response = details_view(self.request)
-
-		ok(response['error']).is_a(Exception)
-		ok(response['item']).is_a(dict).length(0)
+		ok(response['item']) == einstein
 
 
 class FunctionalTests(unittest.TestCase):
@@ -137,6 +130,21 @@ class FunctionalTests(unittest.TestCase):
 		res = self.testapp.get('/find/abc', status=200)
 		ok('id="results"').in_(res.body)
 
+	@test("results page for one slug redirects to details page")
+	def _(self):
+		res = self.testapp.get('/find/slug:albert-einstein', status=302)
+		ok(res.location) == 'http://localhost/details/albert-einstein'
+
+	@test("details page returns 200")
+	def _(self):
+		res = self.testapp.get('/details/albert-einstein', status=200)
+		ok('id="details"').in_(res.body)
+
+	@test("details page for one non-existing slug returns 404")
+	def _(self):
+		res = self.testapp.get('/details/non-exisiting', status=404)
+		ok('Not Found').in_(res.body)
+
 	@test("api page returns 200")
 	def _(self):
 		res = self.testapp.get('/api', status=200)
@@ -160,13 +168,13 @@ class Person():
 	def __call__(self, *args, **kwargs):
 		if len(args):
 			if args[0] == 'albert-einstein':
-				return Get({'result': {'name': 'Albert Einstein'}})
+				return Get({'result': einstein})
 			if args[0] == 'erwin-schrödinger':
 				return Get({'result': {'name': 'Erwin Schrödinger'}})
-		raise Exception()
+		raise HttpClientError()
 
 	def get(self):
-		return {'results': [{'name': 'Albert Einstein'}, {'name': 'Erwin Schrödinger'}]}
+		return {'results': [einstein, {'name': 'Erwin Schrödinger'}]}
 
 class PopitMock():
 	"""a mock object so that we can test the behaviour of 
@@ -174,6 +182,15 @@ class PopitMock():
 
 	def __getattr__(self, key):
 		return Person()
+
+	def get_url(self):
+		return "urlmock"
+
+	def get_api_version(self):
+		return "versionmock"
+
+	def is_online(self):
+		return True
 
 	def __nonzero__(self):
 		return True
