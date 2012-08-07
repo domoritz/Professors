@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from pyramid.config import Configurator
-from pyramid.events import subscriber
-from pyramid.events import BeforeRender
+from pyramid.events import subscriber, BeforeRender, NewRequest
+from pyramid.httpexceptions import HTTPFound, HTTPServerError
+from pyramid import request
 
 import logging
 import re
@@ -71,4 +72,5 @@ def connect_to_popit(settings):
 				password = settings['popit.password'])
 		except ConnectionError, e:
 			log = logging.getLogger(__name__)
-			log.error("Cannot connect to PopIt. \n%s",str(e))
+			log.error("Cannot connect to PopIt. Make sure Popit is running and the try again. \n%s",str(e))
+			raise e
