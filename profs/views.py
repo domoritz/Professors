@@ -43,13 +43,17 @@ def details_view(request):
 	item = {}
 	error = None
 
-	if not get_api():
-		return HTTPServerError(detail='Cannot connect to Popit')
 	try:
 		item = get_api().person(slug).get()['result']
-	except Exception, e:
+	except ConnectionError, e:
 		log.warn(e)
 		error = e
+	except HttpClientError, e:
+		# i.e. 404 not found error
+		log.warn(e)
+		if e:
+			details = "The requested resource could not be found. You may want to try another slug."
+			raise exception_response(404)
 
 	return dict(item = item, error = error)
 
@@ -63,8 +67,6 @@ def results_view(request):
 	qp = QueryParser()
 	parsed = qp.parse(query)
 
-	if not get_api():
-		return HTTPServerError(detail='Cannot connect to Popit')
 	try:
 		if parsed.has_key('slug'):
 			results = []
@@ -77,11 +79,20 @@ def results_view(request):
 		if parsed.has_key('word') and 'all' in parsed['word']:
 			results = get_api().person.get()['results']
 
-	except Exception, e:
+	except ConnectionError, e:
+		log.warn(e)
+		error = "ConnectionError. The PopIt API is currently not available."
+	except HTTPError, e:
 		log.warn(e)
 		error = e
 
 	return dict(query = query, results = results, error = error)
+
+
+@notfound_view_config(renderer="templates/404.pt")
+def notfound(request):
+	request.response.status = 404
+	return dict()
 
 
 class QueryParser(object):

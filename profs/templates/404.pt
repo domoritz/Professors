@@ -1,0 +1,59 @@
+<metal:main use-macro="load: document.pt">
+
+	<div id="404" class="container" metal:fill-slot="content">
+		<header id="api" class="jumbotron subhead">
+			<h1>404 - Not Found</h1>
+			<p class="lead">You are looking for something that does not exist. </p>
+		</header>
+
+
+		<style type="text/css">
+			#paralaxeContainer {
+				width:600px;
+				overflow:hidden;
+				border:0px #000 solid;
+				position:relative;
+				height:400px;
+				background-color:#91c8ca;
+				margin: 0  0 15px 40px;
+			}
+
+			#paralaxeContainer .birds0 {z-index:4; margin-top:55px; margin-left:57px;}
+			#paralaxeContainer .birds1 {z-index:3; margin-top:21px; margin-left:164px;}
+			#paralaxeContainer .bird0 {z-index:4; margin-top:78px; margin-left:478px;}
+			#paralaxeContainer .bird1 {z-index:4; margin-top:135px; margin-left:520px;}
+			#paralaxeContainer .snail {z-index:6; margin-top:136px; margin-left:166px;}
+			#paralaxeContainer .t404 {z-index:6; margin-top:242px; margin-left:150px;}
+			#paralaxeContainer .ground_or {z-index:2; margin-top:220px; margin-left:-30px;}
+			#paralaxeContainer .ground_w {z-index:1; margin-top:205px; margin-left:-44px;}
+			div#paralaxeContainer img {position:absolute; max-width: 1000px !important}
+
+			#failsnailtext {color: grey; text-size: small; margin-left: 50px;}
+		</style>
+		<script type="text/javascript" src="${request.static_path('profs:static/jquery/jquery.zlayer.min.js')}"></script>
+		<script type="text/javascript">
+			$(window).load(function() {
+				$('.ground_w').zlayer({mass:25,canvas:'#paralaxeContainer'});
+				$('.ground_or').zlayer({mass:15,confine:'y',canvas:'#paralaxeContainer'});
+				$('.birds0').zlayer({mass:13,force:'push',canvas:'#paralaxeContainer'});
+				$('.birds1').zlayer({mass:40,force:'push',canvas:'#paralaxeContainer'});
+				$('.bird0').zlayer({mass:20,force:'push',canvas:'#paralaxeContainer'});
+				$('.bird1').zlayer({mass:25,force:'push',canvas:'#paralaxeContainer'});
+				$('.snail').zlayer({mass:10,force:'push',canvas:'#paralaxeContainer'});
+				$('.t404').zlayer({mass:8,force:'push',canvas:'#paralaxeContainer'});
+			});
+		</script>
+
+		<div id="paralaxeContainer">
+			<img src="${request.static_path('profs:static/images/birds0.png')}" class="birds0" />
+			<img src="${request.static_path('profs:static/images/birds1.png')}" class="birds1" />
+			<img src="${request.static_path('profs:static/images/bird0.png')}" class="bird0" />
+			<img src="${request.static_path('profs:static/images/bird1.png')}" class="bird1" />
+			<img src="${request.static_path('profs:static/images/t404.png')}" class="t404" />
+	        <img src="${request.static_path('profs:static/images/snail.png')}" class="snail" />
+	        <img src="${request.static_path('profs:static/images/ground_or.png')}" class="ground_or" />
+	        <img src="${request.static_path('profs:static/images/ground_w.png')}" class="ground_w" />
+	    </div>
+	</div>
+
+</metal:main>
