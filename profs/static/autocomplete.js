@@ -17,7 +17,31 @@ $(function(){
 							return {
 								label: item.name,
 								value: 'slug:'+item.slug,
-								category: 'Professors'
+								category: 'Match in name',
+								rank: 8
+							}
+						}));
+					},
+					error: function( xhr, textStatus, errorThrown ) {
+						console.log(xhr, textStatus, errorThrown)
+						callback(errorThrown)
+					}
+				});
+    		},
+    		function(callback){
+    			$.ajax({
+					url: personUrl,
+					dataType: "jsonp",
+					data: {
+						summary: request.term
+					},
+					success: function( data ) {
+						callback(null, $.map( data.results, function( item ) {
+							return {
+								label: item.name,
+								value: 'slug:'+item.slug,
+								category: 'Match in summary',
+								rank: 4
 							}
 						}));
 					},
@@ -31,7 +55,8 @@ $(function(){
     			all = [{
     				label: 'All Professors', 
     				value: 'all',
-    				category: 'Special'
+    				category: 'Special',
+					rank: 2
     			}]
     			callback(null, all)
     		}
@@ -40,7 +65,10 @@ $(function(){
 				alert("Aww snap. An error occured.\n" + err);
 				response()
 			} else {
-				suggestions = $.merge(results[0], results[1]);
+				suggestions = _.union(results[0], results[1], results[2]);
+				suggestions = _.sortBy(suggestions, function(item) {return item.value+item.rank});
+				suggestions = _.uniq(suggestions, true, function(item) {return item.value});
+				suggestions = _.sortBy(suggestions, function(item) {return -item.rank});
 				response(suggestions);
 			}
 		});
