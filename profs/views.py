@@ -81,9 +81,9 @@ def results_view(request):
             
 		elif parsed.has_key('word'):
 			results = []
-			for query in parsed['word']:
-				results += get_api().person().get(name=query)['results']
-                results += get_api().person().get(summary=query)['results']
+			for q in parsed['word']:
+				results += get_api().person().get(name=q)['results']
+                results += get_api().person().get(summary=q)['results']
 
 	except ConnectionError, e:
 		log.warn(e)
@@ -95,8 +95,6 @@ def results_view(request):
 	# remove empty items, this is faster that filter(lambda x: x, results) but does the same
 	# None is the identity function according to the docs
 	results = filter(None, results)
-	
-	pp(results)
 
 	return dict(query = query, results = results, error = error)
 
@@ -114,7 +112,7 @@ class QueryParser(object):
 
 	def parse(self, query):
 		self.query = query
-		tokens = query.split()
+		tokens = self.query.split()
 
 		parsed = {}
 		for token in tokens:
