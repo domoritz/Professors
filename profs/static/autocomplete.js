@@ -13,14 +13,15 @@ $(function(){
 						name: request.term
 					},
 					success: function( data ) {
-						callback(null, $.map( data.results, function( item ) {
+						var arr = $.map( data.results, function( item ) {
 							return {
 								label: item.name,
 								value: 'slug:'+item.slug,
 								category: 'Match in name',
 								rank: 8
 							}
-						}));
+						})
+						callback(null, _.first(arr, 4));
 					},
 					error: function( xhr, textStatus, errorThrown ) {
 						console.log(xhr, textStatus, errorThrown)
@@ -36,14 +37,16 @@ $(function(){
 						summary: request.term
 					},
 					success: function( data ) {
-						callback(null, $.map( data.results, function( item ) {
+						var arr = $.map( data.results, function( item ) {
 							return {
 								label: item.name,
 								value: 'slug:'+item.slug,
 								category: 'Match in summary',
 								rank: 4
 							}
-						}));
+						})
+						callback(null, _.first(arr, 4));
+						
 					},
 					error: function( xhr, textStatus, errorThrown ) {
 						console.log(xhr, textStatus, errorThrown)
@@ -66,8 +69,8 @@ $(function(){
 				response()
 			} else {
 				suggestions = _.union(results[0], results[1], results[2]);
-				suggestions = _.sortBy(suggestions, function(item) {return item.value+item.rank});
-				suggestions = _.uniq(suggestions, true, function(item) {return item.value});
+				suggestions = _.sortBy(suggestions, function(item) {return -item.value+item.rank});
+				suggestions = _.uniq(suggestions, false, function(item) {return item.value});
 				suggestions = _.sortBy(suggestions, function(item) {return -item.rank});
 				response(suggestions);
 			}
