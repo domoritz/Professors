@@ -58,7 +58,7 @@ def details_view(request):
 	return dict(item = item, error = error)
 
 
-@view_config(route_name='find', renderer='templates/find.pt')
+@view_config(route_name='find', renderer='templates/results.pt')
 def results_view(request):
 	query = request.matchdict['query']
 	results = {}
