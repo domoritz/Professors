@@ -21,7 +21,8 @@ from .views import details_view
 
 DIFF = repr
 
-einstein = {'name': 'Albert Einstein', 'summary': 'E=m*c^2', 'meta': {'edit_url': 'editmock'}}
+einstein = {'name': 'Albert Einstein', 'summary': 'E=m*c^2', 'meta': {'edit_url': 'editmock'}, 'slug': 'albert-einstein'}
+schroedinger = {'name': u'Erwin Schrödinger', 'summary': 'the cat is dead', 'meta': {'edit_url': 'editmock-2'}, 'slug': 'erwin-schroediger'}
 
 class UnitTests(unittest.TestCase):
 	@test("query parser parses popit slug")
@@ -66,13 +67,21 @@ class ViewTests(unittest.TestCase):
 
 	@test("results view should return context dictionary")
 	def _(self):
-		q = 'foo bar'
+		q = 'foo'
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
 		ok(response['error']) == None
 		ok(response['query']) == q
-		ok(response['results']) == {} # no results
+		ok(response['results']) == [] # no results
+		
+	@test("results view should return multi word queries")
+	def _(self):
+		q = "foo bar"
+		self.request.matchdict = {'query': q}
+		response = results_view(self.request)
+
+		ok(response['query']) == q
 
 	@test("results view should show all results on search for all")
 	def _(self):
@@ -80,7 +89,7 @@ class ViewTests(unittest.TestCase):
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
-		ok(response['results']) == [einstein, {'name': 'Erwin Schrödinger'}]
+		ok(response['results']) == [einstein, schroedinger]
 
 	@test("results view should show results for search for slugs")
 	def _(self):
@@ -88,7 +97,7 @@ class ViewTests(unittest.TestCase):
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
-		ok(response['results']) == [einstein, {'name': 'Erwin Schrödinger'}]
+		ok(response['results']) == [einstein, schroedinger]
 
 	@test("details view should return context dictionary")
 	def _(self):
@@ -125,10 +134,17 @@ class FunctionalTests(unittest.TestCase):
 		res = self.testapp.post('/search?query=foo bar', status=302)
 		ok(res.location) == 'http://localhost/find/'+url_quote(q)
 
-	@test("results page returns 200")
+	@test("results page without results returns 200")
 	def _(self):
-		res = self.testapp.get('/find/abc', status=200)
+		res = self.testapp.get('/find/non existing', status=200)
 		ok('id="results"').in_(res.body)
+		ok('did not return any results').in_(res.body)
+		
+	@test("results page with results returns 200")
+	def _(self):
+		res = self.testapp.get('/find/scientist', status=200)
+		ok('id="results"').in_(res.body)
+		ok('Albert Einstein').in_(res.body)
 
 	@test("results page for one slug redirects to details page")
 	def _(self):
@@ -161,8 +177,12 @@ class Get():
 	def __init__(self, d):
 		self.d = d
 
-	def get(self):
-		return self.d
+	def get(self, name=None, summary=None):
+		if not name and not summary:
+			return self.d
+		if name == 'albert' or summary == 'scientist':
+			return self.d
+		return {'results': []}
 
 class Person():
 	def __call__(self, *args, **kwargs):
@@ -170,11 +190,12 @@ class Person():
 			if args[0] == 'albert-einstein':
 				return Get({'result': einstein})
 			if args[0] == 'erwin-schrödinger':
-				return Get({'result': {'name': 'Erwin Schrödinger'}})
-		raise HttpClientError()
+				return Get({'result': schroedinger})
+			raise HttpClientError()
+		return Get({'results': [einstein, schroedinger]})
 
 	def get(self):
-		return {'results': [einstein, {'name': 'Erwin Schrödinger'}]}
+		return {'results': [einstein, schroedinger]}
 
 class PopitMock():
 	"""a mock object so that we can test the behaviour of 
