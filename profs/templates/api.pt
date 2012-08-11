@@ -12,7 +12,7 @@
 			Below you can find the details of the connection details for this Website.
 			<dl class="dl-horizontal">
 				<dt>URL</dt>
-				<dd tal:content="url">The Popit URL</dd>
+				<dd><a tal:content="url" tal:attributes="href url">The Popit URL</a></dd>
 				<dt>API Version</dt>
 				<dd tal:content="version">API version</dd>
 				<dt>Status</dt>
