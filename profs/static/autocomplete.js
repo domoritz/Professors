@@ -80,9 +80,9 @@ $(function(){
 				response()
 			} else {
 				suggestions = _.union(results[0], results[1], results[2]);
+				// sort by rating and remove lowest ranked duplicates
 				suggestions = _.sortBy(suggestions, function(item) {return -item.value+item.rank});
 				suggestions = _.uniq(suggestions, false, function(item) {return item.value});
-				suggestions = _.sortBy(suggestions, function(item) {return -item.rank});
 				response(suggestions);
 			}
 		});
