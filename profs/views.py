@@ -83,7 +83,7 @@ def results_view(request):
 			results = []
 			for q in parsed['word']:
 				results += get_api().person().get(name=q)['results']
-                results += get_api().person().get(summary=q)['results']
+				results += get_api().person().get(summary=q)['results']
 
 	except ConnectionError, e:
 		log.warn(e)
