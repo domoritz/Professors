@@ -222,7 +222,7 @@ form.medium input[type="text"] {
 
 .preview {
 	position: relative;
-	z-index: 10;
+	z-index: 2;
 	background-color: #fff;
 	box-shadow: 0 4px 7px rgba(0, 0, 0, 0.08);
 	padding: 7px 10px;

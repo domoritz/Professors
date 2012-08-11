@@ -15,7 +15,7 @@
 							<label for="find-profs" class="control-label"><span class="badge badge-info" tal:content="len(results)">0</span> results found for </label>
 							<div class="controls">
 								<div class="input-append">
-									<input id="find-profs" class="" type="text" size="40" name="query" value="${query}">
+									<input id="find-profs" class="popit-autocomplete" type="text" size="40" name="query" value="${query}">
 									<button class="btn btn-primary" type="button"><i class="icon-search"></i> Search</button>
 								</div>
 							</div>
