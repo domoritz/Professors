@@ -76,8 +76,14 @@ def results_view(request):
 			for slug in parsed['slug']:
 				results.append(get_api().person(slug).get()['result'])
 
-		if parsed.has_key('word') and 'all' in parsed['word']:
+		elif parsed.has_key('word') and 'all' in parsed['word']:
 			results = get_api().person.get()['results']
+            
+		elif parsed.has_key('word'):
+			results = []
+			for query in parsed['word']:
+				results += get_api().person().get(name=query)['results']
+                results += get_api().person().get(summary=query)['results']
 
 	except ConnectionError, e:
 		log.warn(e)
@@ -85,6 +91,12 @@ def results_view(request):
 	except HTTPError, e:
 		log.warn(e)
 		error = e
+
+	# remove empty items, this is faster that filter(lambda x: x, results) but does the same
+	# None is the identity function according to the docs
+	results = filter(None, results)
+	
+	pp(results)
 
 	return dict(query = query, results = results, error = error)
 

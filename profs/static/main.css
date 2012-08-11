@@ -86,7 +86,7 @@ form.large input[type="text"] {
 
 /*Autocomplete*/
 
-.ui-autocomplete-loading {
+.large .ui-autocomplete-loading {
 	background: white url('ajax.gif') 98% center no-repeat;
 }
 
