@@ -31,6 +31,11 @@
 								<h3>University</h3>
 								<p tal:content="item.university"></p>
 							</div>
+							<div tal:condition="exists:item.other.study">
+								<h3>Field of Study</h3>
+								<p tal:content="item.other.study"></p>
+							</div>
+							
 						</section>
 
 						<section>
