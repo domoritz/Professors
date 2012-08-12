@@ -11,8 +11,8 @@
 
 			<header tal:condition="exists:item.other">
 				<h1 tal:content="item.name">Name</h1>
-				<div tal:condition="exists:item.other.article">
-					<p class="lead" tal:content="item.other.article"></p>
+				<div tal:condition="exists:item.other.Article">
+					<p class="lead" tal:content="item.other.Article[0]"></p>
 				</div>
 
 				<a class="lead" tal:attributes="href item.meta.edit_url">[Edit this person]</a>
@@ -20,20 +20,24 @@
 
 			<article class="container">
 				<div class="row">
-					<div class="span8">
-						<section>
+					<div class="span9">
+						<section tal:condition="exists:item.other">
 							<h2 class="page-header">
 								Professional Data
 								<small>Education, University, ...</small>
 							</h2>
 
-							<div tal:condition="exists:item.university">
+							<div tal:condition="exists:item.other.University">
 								<h3>University</h3>
-								<p tal:content="item.university"></p>
+								<p tal:content="item.other.University[0]"></p>
 							</div>
-							<div tal:condition="exists:item.other.study">
+							<div tal:condition="exists:item.other['Graduated from']">
+								<h3>Graduated from</h3>
+								<p tal:content="item.other['Graduated from'][0]"></p>
+							</div>
+							<div tal:condition="exists:item.other.Study">
 								<h3>Field of Study</h3>
-								<p tal:content="item.other.study"></p>
+								<p tal:content="item.other.Study"></p>
 							</div>
 							
 						</section>
@@ -58,9 +62,13 @@
 								<small>Birthplace, Family, ...</small>
 							</h2>
 
-							<div tal:condition="exists:item.birthplace">
+							<div tal:condition="exists:item.other['Place of Birth']">
 								<h3>Birthplace</h3>
-								<p tal:content="item.birthplace"></p>
+								<div tal:define="place_of_birth 'http://www.geonames.org/maps/showOnMap?q={0}&country=GB'.format(item.other['Place of Birth'][0])">
+									<a tal:attributes="href place_of_birth" target="_blank">
+										<p tal:content="item.other['Place of Birth'][0]"></p>
+									</a>
+								</div>
 							</div>
 						</section>
 
@@ -96,8 +104,11 @@
 						</section>
 					</div>
 
-					<div id="infobar" class="span4">
-						information and links
+					<div id="infobar" class="span3">
+						<h3>Attribution</h3>
+						<p>
+							This has been imported from Freebase. The description comes form Wikipedia. 
+						</p>
 					</div>
 				</div>
 
