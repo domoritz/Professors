@@ -9,10 +9,10 @@
 	<div id="details" class="container" metal:fill-slot="content">
 		<div tal:condition="exists:item" tal:condition="exists:item.name">
 
-			<header>
+			<header tal:condition="exists:item.other">
 				<h1 tal:content="item.name">Name</h1>
-				<div tal:condition="exists:item.summary">
-					<p class="lead" tal:content="item.summary"></p>
+				<div tal:condition="exists:item.other.article">
+					<p class="lead" tal:content="item.other.article"></p>
 				</div>
 
 				<a class="lead" tal:attributes="href item.meta.edit_url">[Edit this person]</a>

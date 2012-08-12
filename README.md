@@ -28,7 +28,7 @@ There is a libs folder in `/profs/` which contains a git submodule with a refere
 
 ## Recommended Schema
 * __name__: The professors name.
-* __summary__: A short summary of the professors field of study and other things that do not match the attributes below.
+* __other.article__: A short summary of the professors field of study and other things that do not match the attributes below.
 * __other.university__: The university where the professor works.
 * __other.study__: The priofessor's field of study.
 * __links__: An array of link items consisting of a comment and an url
