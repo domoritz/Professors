@@ -251,6 +251,18 @@ ul.data {
 	margin-top: 20px;
 }
 
+li.summary i {
+	float: left;
+}
+
+li.summary div {
+	max-height: 3em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-overflow: -o-ellipsis-lastline;
+	white-space:nowrap;
+}
+
 /* Details page */
 #details h2.page-header {
 	padding-bottom: 0px;

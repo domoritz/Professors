@@ -64,7 +64,7 @@
 						</div>
 						<div class="info well">
 							<ul class="data" tal:condition="exists:item.summary">
-								<li><i class="icon-user"></i> <span tal:content="item.summary"></span></li>
+								<li class="summary"><i class="icon-user"></i> <div tal:content="item.summary"></div></li>
 							</ul>
 							<span tal:repeat="tag item" class="label label-info tag">
 								<i class="icon-tag"></i> <span tal:content="tag"></span>

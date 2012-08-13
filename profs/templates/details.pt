@@ -24,7 +24,7 @@
 						<section tal:condition="exists:item.other">
 							<h2 class="page-header">
 								Professional Data
-								<small>Education, University, ...</small>
+								<small>Education, University, Field of Study...</small>
 							</h2>
 
 							<div tal:condition="exists:item.other.University">
@@ -59,7 +59,7 @@
 						<section>
 							<h2 class="page-header">
 								Personal Data
-								<small>Birthplace, Family, ...</small>
+								<small>Place of Birth, Family, Nationality...</small>
 							</h2>
 
 							<div tal:condition="exists:item.other.Nationality">
@@ -79,7 +79,7 @@
 						<section>
 							<h2 class="page-header">
 								Links
-								<small>Website, Wikipedia, ...</small>
+								<small>Website, Wikipedia, Freebase, ...</small>
 							</h2>
 
 							<div tal:condition="exists:item.links">
@@ -97,7 +97,7 @@
 						<section>
 							<h2 class="page-header">
 								Tags
-								<small></small>
+								<small>Available attributes from the API</small>
 							</h2>
 
 							<div>
@@ -111,7 +111,7 @@
 					<div id="infobar" class="span3">
 						<h3>Attribution</h3>
 						<p>
-							This has been imported from Freebase. The description comes form Wikipedia. 
+							This has been imported from <a href="http://wiki.freebase.com/wiki/Freebase_license">Freebase</a>. The description comes form <a href="http://en.wikipedia.org/wiki/Wikipedia:Copyrights">Wikipedia</a>. 
 						</p>
 					</div>
 				</div>
