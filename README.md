@@ -31,8 +31,10 @@ There is a libs folder in `/profs/` which contains a git submodule with a refere
 Make sure that you use the right case. 
 
 * __name__: The professors name.
-* __other.Article__: A short summary of the professors field of study and other things that do not match the attributes below.
+* __summary__: A short summary of the professors field of study and other things that do not match the attributes below.
 * __other.University__: The university where the professor works.
-* __other.Study__: The priofessor's field of study.
+* __other.Study__: The professor's field of study.
+* __other."Place of Birth"__: The place of birth will be linked to the place.
+* __other."Nationality"__: The place of birth will be linked to the place.
 * __links__: An array of link items consisting of a comment and an url
 * __contact_details__: An array of contact details consisting of a kind and a value
