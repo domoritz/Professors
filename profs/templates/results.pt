@@ -12,7 +12,7 @@
 				<form id="profs-serach-form" class="form-horizontal medium" action="/search" method="POST">
 					<fieldset>
 						<div class="control-group">
-							<label for="find-profs" class="control-label"><span class="badge badge-info" tal:content="len(results)">0</span> results found for </label>
+							<label for="find-profs" class="control-label"><span class="badge badge-info" tal:content="item_count">0</span> results found for </label>
 							<div class="controls">
 								<div class="input-append">
 									<input id="find-profs" class="popit-autocomplete" type="text" size="40" name="query" value="${query}">

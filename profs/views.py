@@ -110,8 +110,9 @@ def results_view(request):
 	# remove empty items, this is faster that filter(lambda x: x, results) but does the same
 	# None is the identity function according to the docs
 	results = filter(None, results)
+	count= len([x for y in map(lambda x: x['data'], results) for x in y])
 
-	return dict(query = query, results = results, error = error)
+	return dict(query = query, results = results, item_count = count, error = error)
 
 
 @notfound_view_config(renderer="templates/404.pt")
