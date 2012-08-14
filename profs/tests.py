@@ -89,7 +89,9 @@ class ViewTests(unittest.TestCase):
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
-		ok(response['results']) == [einstein, schroedinger]
+		ok(response['results']).length(1)
+		ok(response['results'][0]['name']) == "All" 
+		ok(response['results'][0]['data']) == [einstein, schroedinger]
 
 	@test("results view should show results for search for slugs")
 	def _(self):
@@ -97,7 +99,7 @@ class ViewTests(unittest.TestCase):
 		self.request.matchdict = {'query': q}
 		response = results_view(self.request)
 
-		ok(response['results']) == [einstein, schroedinger]
+		ok(response['results'][0]['data']) == [einstein, schroedinger]
 
 	@test("details view should return context dictionary")
 	def _(self):

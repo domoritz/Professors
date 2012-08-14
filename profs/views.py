@@ -10,6 +10,8 @@ import datetime
 from pprint import pprint as pp
 from profs import get_api
 from libs.popit.popit import HttpClientError
+from operator import sub
+from itertools import imap
 
 log = logging.getLogger(__name__)
 
@@ -61,7 +63,7 @@ def details_view(request):
 @view_config(route_name='find', renderer='templates/results.pt')
 def results_view(request):
 	query = request.matchdict['query']
-	results = {}
+	results = []
 	error = None
 
 	qp = QueryParser()
@@ -69,21 +71,28 @@ def results_view(request):
 
 	try:
 		if parsed.has_key('slug'):
-			results = []
+			res = {'name': 'Slug', 'data': []}
 			if len(parsed['slug']) == 1:
 				url = request.route_url('details', slug=parsed['slug'][0])
 				return HTTPFound(location=url)
 			for slug in parsed['slug']:
-				results.append(get_api().person(slug).get()['result'])
+				res['data'].append(get_api().person(slug).get()['result'])
+			results.append(res);
 
 		elif parsed.has_key('word') and 'all' in parsed['word']:
-			results = get_api().person.get()['results']
+			res = {'name': 'All'}
+			res['data'] = get_api().person.get()['results']
+			results.append(res)
             
 		elif parsed.has_key('word'):
-			results = []
+			name = {'name': 'Name', 'data': []}
+			summary = {'name': 'Summary', 'data': []}
 			for q in parsed['word']:
-				results += get_api().person().get(name=q)['results']
-				results += get_api().person().get(summary=q)['results']
+				name['data'] += get_api().person().get(name=q)['results']
+				summary['data'] += get_api().person().get(summary=q)['results']
+			#summary['data'] = list(imap(sub, summary['data'], name['data']))
+			results.append(name)
+			results.append(summary)
 
 	except ConnectionError, e:
 		log.warn(e)
@@ -91,6 +100,8 @@ def results_view(request):
 	except HTTPError, e:
 		log.warn(e)
 		error = e
+
+	print results
 
 	# remove empty items, this is faster that filter(lambda x: x, results) but does the same
 	# None is the identity function according to the docs

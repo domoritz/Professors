@@ -65,6 +65,31 @@ $(function(){
 					}
 				});
     		},
+    		/*function(callback){
+    			$.ajax({
+					url: personUrl,
+					dataType: "jsonp",
+					data: {
+						'other.University': request.term
+					},
+					success: function( data ) {
+						var arr = $.map( data.results, function( item ) {
+							return {
+								label: item.other.University,
+								value: 'university:'+item.other.University,
+								category: 'Universities',
+								rank: 9
+							}
+						})
+						callback(null, _.first(arr, 4));
+						
+					},
+					error: function( xhr, textStatus, errorThrown ) {
+						console.log(xhr, textStatus, errorThrown)
+						callback(errorThrown)
+					}
+				});
+    		},*/
     		function(callback){
     			all = [{
     				label: 'All Professors', 

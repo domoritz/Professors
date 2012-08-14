@@ -55,23 +55,24 @@
 				</div>
 
 				<div id="results-list" class="row" tal:condition="exists:results">
-					
-					<section tal:repeat="item results">
-  						<div class="preview thumbnail">
-							<h3 tal:define="url request.route_path('details', slug=item.slug)">
-								<a href="${url}" tal:content="item.name">Name</a>
-							</h3>
-						</div>
-						<div class="info well">
-							<ul class="data" tal:condition="exists:item.summary">
-								<li class="summary"><i class="icon-user"></i> <div tal:content="item.summary"></div></li>
-							</ul>
-							<span tal:repeat="tag item" class="label label-info tag">
-								<i class="icon-tag"></i> <span tal:content="tag"></span>
-							</span>
-						</div>
-					</section>
-
+					<div tal:repeat="group results">
+						<h2 tal:condition="len(results) > 1">${group.name}</h2>
+						<section tal:repeat="item group.data">
+	  						<div class="preview thumbnail">
+								<h3 tal:define="url request.route_path('details', slug=item.slug)">
+									<a href="${url}" tal:content="item.name">Name</a>
+								</h3>
+							</div>
+							<div class="info well">
+								<ul class="data" tal:condition="exists:item.summary">
+									<li class="summary"><i class="icon-user"></i> <div tal:content="item.summary"></div></li>
+								</ul>
+								<span tal:repeat="tag item" class="label label-info tag">
+									<i class="icon-tag"></i> <span tal:content="tag"></span>
+								</span>
+							</div>
+						</section>
+					</div>
 				</div>
 
 				<div id="results-pagination" class="pagination pagination-centered">
