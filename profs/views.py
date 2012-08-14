@@ -12,6 +12,7 @@ from profs import get_api
 from libs.popit.popit import HttpClientError
 from operator import sub
 from itertools import imap
+from collections import Counter
 
 log = logging.getLogger(__name__)
 
@@ -80,9 +81,10 @@ def results_view(request):
 			results.append(res);
 
 		elif parsed.has_key('word') and 'all' in parsed['word']:
-			res = {'name': 'All'}
+			res = {'name': 'All', 'data': []}
 			res['data'] = get_api().person.get()['results']
-			results.append(res)
+			if res['data']:
+				results.append(res)
             
 		elif parsed.has_key('word'):
 			name = {'name': 'Name', 'data': []}
@@ -91,8 +93,12 @@ def results_view(request):
 				name['data'] += get_api().person().get(name=q)['results']
 				summary['data'] += get_api().person().get(summary=q)['results']
 			#summary['data'] = list(imap(sub, summary['data'], name['data']))
-			results.append(name)
-			results.append(summary)
+			summary['data'] = [x for x in summary['data'] if x not in name['data']] # summary without items from name
+
+			if name['data']:
+				results.append(name)
+			if summary['data']:
+				results.append(summary)
 
 	except ConnectionError, e:
 		log.warn(e)
@@ -100,8 +106,6 @@ def results_view(request):
 	except HTTPError, e:
 		log.warn(e)
 		error = e
-
-	print results
 
 	# remove empty items, this is faster that filter(lambda x: x, results) but does the same
 	# None is the identity function according to the docs
