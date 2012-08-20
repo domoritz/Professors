@@ -26,21 +26,19 @@
 		</div>
 
 		<div class="row-fluid">
+			<!--!
 			<div id="refine-bar" class="span3">
 				<ul class="nav nav-list">
-					<li class="nav-header"><i class="icon-flag"></i>Filter by country</li>
-					<li><a href="#">UK</a></li>
-					<li><a href="#">Germany</a></li>
-
-					<li class="nav-header"><i class="icon-book"></i>Filter by field of study</li>
-					<li><a href="#">Computer Science</a></li>
-					<li><a href="#">Physics</a></li>
+					<li class="nav-header"><i class="icon-book"></i>Filter by University</li>
+					<li><a href="#">Oxford</a></li>
+					<li><a href="#">Cambridge</a></li>
 
 					<li class="divider"></li>
 					<li><a href="#"><i class="icon-filter"></i>Clear filters</a></li>
 				</ul>
 			</div>
-			<div class="span9">
+			-->
+			<div class="span12">
 
 				<div tal:condition="not results" class="" id="no-results">
 					<p class="lead">Your search - <strong tal:content="query"></strong> - did not return any results.</p>
@@ -75,6 +73,7 @@
 					</div>
 				</div>
 
+				<!--!
 				<div id="results-pagination" class="pagination pagination-centered">
 					<ul>
 						<li><a href="#">Prev</a></li>
@@ -87,6 +86,7 @@
 						<li><a href="#">Next</a></li>
 					</ul>
 				</div>
+				-->
 
 			</div>
 		</div>
