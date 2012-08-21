@@ -32,6 +32,11 @@ def explore_view(request):
 	return dict(error = None)
 
 
+@view_config(route_name='searchall')
+def results_view_all(request):
+	url = request.route_url('find', query='all')
+	return HTTPFound(location=url)
+
 @view_config(route_name='search', request_method='POST')
 def search_view(request):
 	query = request.params['query']
