@@ -53,6 +53,11 @@ def details_view(request):
 
 	try:
 		item = get_api().person(slug).get()['result']
+
+		item['positions'] = {}
+		positions = get_api().position().get(person = item['_id'])['results']
+		for p in positions:
+			item['positions'][p['title']] = get_api().organisation(p['organisation']).get()['result']
 	except ConnectionError, e:
 		log.warn(e)
 		error = e

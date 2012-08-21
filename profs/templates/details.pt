@@ -21,15 +21,19 @@
 			<article class="container">
 				<div class="row">
 					<div class="span9">
-						<section tal:condition="exists:item.other">
+						<section>
 							<h2 class="page-header">
 								Professional Data
 								<small>Education, University, Field of Study...</small>
 							</h2>
 
-							<div tal:condition="exists:item.other.University">
+							<div tal:condition="exists:item.positions.University">
 								<h3>University</h3>
-								<p tal:content="item.other.University[0]"></p>
+								<p tal:content="item.positions.University.name"></p>
+							</div>
+							<div tal:condition="exists:item.positions.Employer">
+								<h3>Employer</h3>
+								<p tal:content="item.positions.Employer.name"></p>
 							</div>
 							<div tal:condition="exists:item.other['Graduated from']">
 								<h3>Graduated from</h3>

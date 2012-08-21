@@ -21,8 +21,8 @@ from .views import details_view
 
 DIFF = repr
 
-einstein = {'name': 'Albert Einstein', 'summary': 'E=m*c^2', 'meta': {'edit_url': 'editmock'}, 'slug': 'albert-einstein'}
-schroedinger = {'name': u'Erwin Schrödinger', 'summary': 'the cat is dead', 'meta': {'edit_url': 'editmock-2'}, 'slug': 'erwin-schroediger'}
+einstein = {'name': 'Albert Einstein', 'summary': 'E=m*c^2', 'meta': {'edit_url': 'editmock'}, 'slug': 'albert-einstein', '_id': '0'}
+schroedinger = {'name': u'Erwin Schrödinger', 'summary': 'the cat is dead', 'meta': {'edit_url': 'editmock-2'}, 'slug': 'erwin-schroediger', '_id': '1'}
 
 class UnitTests(unittest.TestCase):
 	@test("query parser parses popit slug")
@@ -173,14 +173,18 @@ class FunctionalTests(unittest.TestCase):
 		res = self.testapp.get('/explore', status=200)
 		ok('id="explore"').in_(res.body)
 
-
+##
+## Popit mockup
+##
 
 class Get():
 	def __init__(self, d):
 		self.d = d
 
-	def get(self, name=None, summary=None):
+	def get(self, name=None, summary=None, person=None):
 		if not name and not summary:
+			return self.d
+		if person:
 			return self.d
 		if name == 'albert' or summary == 'scientist':
 			return self.d
@@ -199,12 +203,27 @@ class Person():
 	def get(self):
 		return {'results': [einstein, schroedinger]}
 
+class Position(object):
+	def __call__(self, *args, **kwargs):
+		return Get({'results': [{'organisation': '2', 'title': 'foo'}]})
+		
+
+class Organisation(object):
+	def __call__(self, *args, **kwargs):
+		return Get({'result':{'name': 'an org name'}})
+
+
 class PopitMock():
 	"""a mock object so that we can test the behaviour of 
 	this app instead of popit itself"""
 
 	def __getattr__(self, key):
-		return Person()
+		if key == 'person':
+			return Person()
+		elif key == 'position':
+			return Position()
+		elif key == 'organisation':
+			return Organisation()
 
 	def get_url(self):
 		return "urlmock"
@@ -213,9 +232,6 @@ class PopitMock():
 		return "versionmock"
 
 	def is_online(self):
-		return True
-
-	def __nonzero__(self):
 		return True
 
 	def __str__(self):
