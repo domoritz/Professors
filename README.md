@@ -5,10 +5,6 @@ A Professors repository built on top of [PopIt](https://github.com/mysociety/pop
 
 This project in a very early stage of development. 
 
-## How to install Professors
-
-…
-
 ## Demo
 
 Try the live demo on [http://gsoc12-profs.devtation.de/](http://gsoc12-profs.devtation.de/).
